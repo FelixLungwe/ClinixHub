@@ -1,14 +1,14 @@
 {
-  "role":[
+  "role": [
     {
-      "id": 1,
       "roleName": "medecin",
-      "commentaire": "celui qui est en charge des consultations generales"
+      "commentaire": "celui qui est en charge des consultations générales",
+      "id": 1
     },
     {
       "id": 2,
-      "roleName": "infirmiere",
-      "commentaire": "celui qui est en charge des sois medicaux"
+      "roleName": "infirmière",
+      "commentaire": "celui qui est en charge des soins médicaux"
     }
   ],
   "user": [
@@ -18,13 +18,11 @@
       "email": "hicintukacarmel@gmail.com",
       "username": "kiki",
       "password": "123",
-      "roles": [
-        {
-          "id": 2,
-          "roleName": "infirmiere",
-          "commentaire": "celui qui est en charge des sois medicaux"
-        }
-      ]
+      "role": {
+        "id": 2,
+        "roleName": "infirmiere",
+        "commentaire": "celui qui est en charge des sois medicaux"
+      }
     }
   ]
 }

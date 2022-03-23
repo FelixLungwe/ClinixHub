@@ -1,3 +1,4 @@
+import { Role } from './role';
 import { environment } from './../environments/environment';
 import { Injectable, Host } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -18,9 +19,29 @@ export class ClinixServiceService {
    * getUsers
    */
   public getUsers() : Observable<User[]>{
-    console.log('getUsers()');
     return this.http.get<User[]>(this.apiURL+"/user"); 
   }
 
+  public getRoles() : Observable<Role[]>{
+    return this.http.get<Role[]>(this.apiURL+"/role"); 
+  }
+
+  /**
+   * saveRole
+   */
+  public saveRole(role: Role) : Observable<Role> {
+    return this.http.post<Role>(this.apiURL+"/role", role);
+  }
+
+  public updateRole(role: Role) : Observable<Role> {
+    return this.http.put<Role>(this.apiURL+"/role/"+role.id, role);
+  }
+
+  /**
+   * deleteRole
+   */
+  public deleteRole(roleId: number) : Observable<void>{
+    return this.http.delete<void>(this.apiURL+"/role/"+roleId);
+  }
    
 }

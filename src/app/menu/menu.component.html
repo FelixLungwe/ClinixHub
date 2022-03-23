@@ -8,7 +8,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="nav-link">Home</a> 
+          <a routerLink="/menu" class="nav-link">Home</a> 
         </li>
       </ul>
     </nav>
@@ -53,7 +53,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a routerLink="/roles" class="nav-link">
                     <i class="fa fa-users"></i>
                     <p>Listes roles</p>
                   </a>
@@ -137,11 +137,8 @@
                     70% charge horaire
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box bg-gradient-success">
                 <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
@@ -157,11 +154,8 @@
                     67% doses consommés
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box bg-gradient-warning">
                 <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
@@ -177,11 +171,8 @@
                     89% operations réussies
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box bg-gradient-danger">
                 <span class="info-box-icon"><i class="fas fa-comments"></i></span>
@@ -197,17 +188,14 @@
                     79% de sorties en réanimations
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
-            <!-- /.col -->
           </div>
-        <!-- end row -->
 
 
         <!-- Default box -->
-        <router-outlet></router-outlet>
+        <!-- <router-outlet> </router-outlet> -->
+        
         <!-- /.card -->
   
       </section>
