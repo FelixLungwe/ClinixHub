@@ -1,0 +1,30 @@
+{
+  "role":[
+    {
+      "id": 1,
+      "roleName": "medecin",
+      "commentaire": "celui qui est en charge des consultations generales"
+    },
+    {
+      "id": 2,
+      "roleName": "infirmiere",
+      "commentaire": "celui qui est en charge des sois medicaux"
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "fullname": "hicintuka",
+      "email": "hicintukacarmel@gmail.com",
+      "username": "kiki",
+      "password": "123",
+      "roles": [
+        {
+          "id": 2,
+          "roleName": "infirmiere",
+          "commentaire": "celui qui est en charge des sois medicaux"
+        }
+      ]
+    }
+  ]
+}
