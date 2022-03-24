@@ -33,6 +33,13 @@ export class ClinixServiceService {
     return this.http.post<Role>(this.apiURL+"/role", role);
   }
 
+  /**
+   * saveUser
+   */
+  public saveUser(user: User) : Observable<User>{
+    return this.http.post<User>(this.apiURL+"/user", user);
+  }
+
   public updateRole(role: Role) : Observable<Role> {
     return this.http.put<Role>(this.apiURL+"/role/"+role.id, role);
   }

@@ -16,13 +16,20 @@
       "id": 1,
       "fullname": "hicintuka",
       "email": "hicintukacarmel@gmail.com",
-      "username": "kiki",
+      "username": "hicintukacarmel@gmail.com",
       "password": "123",
-      "role": {
-        "id": 2,
-        "roleName": "infirmiere",
-        "commentaire": "celui qui est en charge des sois medicaux"
-      }
+      "imageUrl": "jakjj",
+      "role": "infirmiere",
+      "photo": "C:\\fakepath\\WhatsApp Image 2020-12-29 at 13.50.45.jpeg"
+    },
+    {
+      "fullname": "didier hicintuka",
+      "email": "hicintukadidier@gmail.com",
+      "username": "hicintukadidier@gmail.com",
+      "password": "345",
+      "role": "infirmière",
+      "imageUrl": "C:\\fakepath\\WhatsApp Image 2020-12-29 at 13.50.45.jpeg",
+      "id": 2
     }
   ]
 }

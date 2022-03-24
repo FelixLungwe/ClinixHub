@@ -126,7 +126,7 @@
                       <div class="row mb-2">
                         <div class="col-sm-6">
                           <!-- <h1>Yobora-Soft | Dashboard</h1> -->
-                          <button type="button" class="btn btn-primary" href="#add" data-toggle="modal">ajouter role</button>
+                          <button type="button" class="btn btn-primary" href="#add" data-toggle="modal"><i class="fas fa-plus"></i> ajouter role</button>
                           <!-- modal  add client-->
                           <div class="modal fade" id="add" >
                                 <div class="modal-dialog ">
@@ -213,7 +213,7 @@
                         <div class="col-sm-6">
                           <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a routerLink="/menu">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">gestion roles</li>
                           </ol>
                         </div>
                       </div> 
@@ -239,7 +239,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                           <thead>
                           <tr>
-                            <th>Role</th>
+                            <th>Profil</th>
                             <th>Commentaire</th>
                             <!-- <th>email</th>
                             <th>telephone</th>
@@ -258,7 +258,7 @@
                             <td></td> -->
                             <td>
                                 <!-- <button type="button"   class="btn btn-info">user</button> -->
-                                <button type="button" class="btn btn-info"><i class="fas fa-plus"></i> add user</button>
+                                <button type="button" data-target="#addUser" data-toggle="modal" class="btn btn-success"><i class="fas fa-plus"></i> add user</button>
                             </td>
                             <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -307,18 +307,18 @@
                                     </div>
                                     <div class="modal-body">voulez vous supprimer ce role?</div>
                                     <div class="modal-footer">
-                                      <button class="btn btn-secondary" type="button" data-dismiss="modal">non</button>
+                                      <button class="btn btn-warning" type="button" data-dismiss="modal">non</button>
                                       <button (click)="onDeleteRole(roleDelete?.id)" class="btn btn-danger" type="button" data-dismiss="modal">oui</button>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            <!-- modal  add proforma-->
-            <div class="modal fade" id="addProforma" >
+                            <!-- modal  add user-->
+            <div class="modal fade" id="addUser" >
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" id="add-proforma">x</button>
+                            <button type="button" class="close" data-dismiss="modal" id="add-user">x</button>
                             <!-- <h4 class="modal-title" style="margin-left:10px">Plus d'informations</h4> -->
                         </div> 
                         <div class="modal-body">
@@ -332,30 +332,45 @@
                                                         </div>
                                                         <!-- /.card-header -->
                                                         <!-- form start -->
-                                                        <form #addForm="ngForm" >
+                                                        <form #addForm="ngForm" (ngSubmit) = "onAddUser(addForm)">
                                                           <div class="card-body">
                                                             <div class="card-body">
                                                             <div class="form-group">
-                                                                    <label for="exampleInputEmail1">numero proforma</label>
-                                                                    <input type="text" ngModel class="form-control" name="num_proforma" id="email"  required>
+                                                                    <label for="exampleInputEmail1">nom complet</label>
+                                                                    <input type="text" ngModel class="form-control" name="fullname" id="fullname"  required>
                                                             </div>
                                                             <div class="form-group">
-                                                                    <label for="exampleInputEmail1">designation</label>
-                                                                    <input type="text" ngModel class="form-control" name="designation" id="email"  required>
+                                                                    <label for="exampleInputEmail1">email</label>
+                                                                    <input type="email" ngModel class="form-control" name="email" id="email"  required>
                                                             </div>
                                                             <div class="form-group">
-                                                                            <label for="exampleInputEmail1">etablissement</label>
-                                                                            <input type="text" ngModel class="form-control" name="nom_etablissement" id="phone"  required>
+                                                                            <label for="exampleInputEmail1">username</label>
+                                                                            <input type="text" ngModel class="form-control" name="username" id="username"  required>
                                                             </div>
                                                             <div class="form-group">
-                                                                                <label for="exampleInputEmail1">adresse</label>
-                                                                                <input type="text" ngModel class="form-control" name="adresse_etablissement" id="phone"  required>
+                                                                                <label for="exampleInputEmail1">password</label>
+                                                                                <input type="password" ngModel class="form-control" name="password" id="password"  required>
                                                             </div>
                                                             <div class="form-group">
-                                                                    <label for="exampleInputEmail1">forme juridique</label>
-                                                                    <input type="text" ngModel class="form-control" name="forme_juridique" id="phone"  required>
+                                                                    <label>role</label>
+                                                                    <select class="form-control" ngModel name="role">
+                                                                      <option *ngFor="let r of roles">{{ r.roleName }}</option>
+                                                                      <!-- <option>option 2</option> -->
+                                                                      <!-- <option>option 3</option> -->
+                                                                      <!-- <option>option 4</option> -->
+                                                                      <!-- <option>option 5</option> -->
+                                                                    </select>
                                                             </div>
                                                             <div class="form-group">
+                                                                    <label for="exampleInputFile">photo</label>
+                                                                    <div class="input-group">
+                                                                      <div class="custom-file">
+                                                                        <input type="file" class="custom-file-input" ngModel name="imageUrl" id="exampleInputFile">
+                                                                        <label class="custom-file-label" for="exampleInputFile">Choisissez votre photo</label>
+                                                                      </div>
+                                                                    </div>
+                                                            </div>
+                                                            <!-- <div class="form-group">
                                                                 <label for="exampleInputEmail1">prix unitaire htc</label>
                                                                 <input type="text" ngModel class="form-control" name="prix_unitaire_htc" id="telephone"  required>
                                                             </div>
@@ -374,16 +389,16 @@
                                                             <div class="form-group">
                                                               <label for="exampleInputEmail1">quantite</label>
                                                               <input type="text" ngModel class="form-control" name="quantite" id="email"  required>
-                                                            </div>
-                                                            <div class="form-group">
+                                                            </div> -->
+                                                            <!-- <div class="form-group">
                                                                         <label for="exampleInputEmail1">date facturation</label>
                                                                         <input type="date" ngModel class="form-control" name="date_facturation" id="phone"  required>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         </div>
                                                         <!-- /.card-body -->
                                                         <div class="card-footer">
-                                                            <button  type="submit" class="btn btn-primary" >ajouter</button>
+                                                            <button [disabled] = "addForm.invalid" type="submit" class="btn btn-primary" >ajouter</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -405,7 +420,7 @@
                           </tbody>
                           <tfoot>
                           <tr>
-                                <th>Role</th>
+                                <th>Profil</th>
                                 <th>Commentaire</th>
                                 <!-- <th>email</th>
                                 <th>telephone</th>

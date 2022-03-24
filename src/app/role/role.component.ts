@@ -1,3 +1,4 @@
+import { User } from './../user';
 import { ClinixServiceService } from './../clinix-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../role';
@@ -20,6 +21,21 @@ export class RoleComponent implements OnInit {
   ngOnInit(): void {
     this.getRoles();
   }
+
+  public onAddUser(addForm: NgForm) : void {
+    const b = document.getElementById('add-user')!;
+    b.click();
+
+    this.clinixService.saveUser(addForm.value).subscribe(
+      (response: User)=>{
+        addForm.resetForm();
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
+
 
   /**
    * getRoles
