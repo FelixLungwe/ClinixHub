@@ -33,6 +33,8 @@ export class AuthComponent implements OnInit {
         for(let user of this.users){
           if (user.email === form.value['email'] && user.password === form.value['password']) {
             localStorage.setItem('username', user.email);
+            localStorage.setItem('fullname', user.fullname);
+            localStorage.setItem('photo', user.photo);
             // this.router.navigate(['/menu']);
             this.router.navigateByUrl('/menu');
             this.isOk = false;

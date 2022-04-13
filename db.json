@@ -1,35 +1,157 @@
 {
+  "acceuil": [
+    {
+      "id": 1,
+      "dateSortie": "2022-04-14",
+      "serviceDestination": "BLOP / Bloc opératoire",
+      "envoyeConsult": "oui",
+      "modePaiement": "CAM",
+      "num": "2736A"
+    },
+    {
+      "dateSortie": "2022-04-15",
+      "serviceDestination": "BLOP / Chirurgie",
+      "envoyeConsult": "non",
+      "modePaiement": "SOC",
+      "id": 2,
+      "num": "8836ABJ56"
+    },
+    {
+      "dateSortie": "2022-04-14",
+      "serviceDestination": "BSG / Banque de sang",
+      "envoyeConsult": "oui",
+      "modePaiement": "SOC",
+      "id": 3,
+      "num": "8836ABJ56"
+    },
+    {
+      "dateSortie": "2022-04-16",
+      "serviceDestination": "BLOP / Chirurgie",
+      "envoyeConsult": "oui",
+      "modePaiement": "CAM",
+      "id": 4,
+      "num": "8836ABJ56"
+    }
+  ],
+  "patient": [
+    {
+      "id": "1",
+      "patientId": "2736A",
+      "fullName": "MUCO liz",
+      "age": "23",
+      "sexe": "M",
+      "origine": "AB",
+      "groupeAge": "CD",
+      "chefFamille": "MBAZA jean",
+      "province": "MUYINGA",
+      "commune": "GASHOHO",
+      "zone": "MURI",
+      "colline": "GWEMA",
+      "sousColline": "BUTA",
+      "quartier": "KIRIMA",
+      "avenue": "MUREKE",
+      "numero": "12",
+      "statut": "entree",
+      "photo": "assets//user7-128x128.jpg"
+    },
+    {
+      "id": "2",
+      "patientId": "8836ABJ56",
+      "fullName": "MULELE paul",
+      "age": "23",
+      "sexe": "M",
+      "origine": "AB",
+      "groupeAge": "CD",
+      "chefFamille": "MBAZA jean",
+      "province": "MUYINGA",
+      "commune": "GASHOHO",
+      "zone": "MURI",
+      "colline": "GWEMA",
+      "sousColline": "BUTA",
+      "quartier": "KIRIMA",
+      "avenue": "MUREKE",
+      "numero": "12",
+      "statut": "entree",
+      "photo": "assets//user1-128x128.jpg"
+    },
+    {
+      "id": "3",
+      "patientId": "98736ABJ56",
+      "fullName": "KYUMBI eric",
+      "age": "23",
+      "sexe": "M",
+      "origine": "AB",
+      "groupeAge": "CD",
+      "chefFamille": "MBAZA jean",
+      "province": "MUYINGA",
+      "commune": "GASHOHO",
+      "zone": "MURI",
+      "colline": "GWEMA",
+      "sousColline": "BUTA",
+      "quartier": "KIRIMA",
+      "avenue": "MUREKE",
+      "numero": "12",
+      "statut": "entree",
+      "photo": "assets//user2-160x160.jpg"
+    },
+    {
+      "id": "5",
+      "patientId": "82377ABJ56",
+      "fullName": "INEZA bella",
+      "age": "23",
+      "sexe": "M",
+      "origine": "AB",
+      "groupeAge": "CD",
+      "chefFamille": "MBAZA jean",
+      "province": "MUYINGA",
+      "commune": "GASHOHO",
+      "zone": "MURI",
+      "colline": "GWEMA",
+      "sousColline": "BUTA",
+      "quartier": "KIRIMA",
+      "avenue": "MUREKE",
+      "numero": "12",
+      "statut": "entree",
+      "photo": "assets//user5-128x128.jpg"
+    }
+  ],
   "role": [
     {
+      "id": 1,
       "roleName": "medecin",
       "commentaire": "celui qui est en charge des consultations générales",
-      "id": 1
+      "permission": [
+        {
+          "id": 1,
+          "type_permission": "READ",
+          "description": "permet de rechercher des donnees"
+        }
+      ]
     },
     {
       "id": 2,
-      "roleName": "infirmière",
+      "roleName": "infirmier",
       "commentaire": "celui qui est en charge des soins médicaux"
     }
   ],
   "user": [
     {
       "id": 1,
-      "fullname": "hicintuka",
+      "fullname": "gruay salongo",
       "email": "hicintukacarmel@gmail.com",
-      "username": "hicintukacarmel@gmail.com",
+      "username": "hicintukacarmel@skynet-burundi.bi",
       "password": "123",
-      "imageUrl": "jakjj",
-      "role": "infirmiere",
-      "photo": "C:\\fakepath\\WhatsApp Image 2020-12-29 at 13.50.45.jpeg"
+      "photo": "assets//WhatsAppImage2020-12-29at13.50.45.jpeg",
+      "role": "infirmier"
     },
     {
+      "id": 2,
       "fullname": "didier hicintuka",
       "email": "hicintukadidier@gmail.com",
-      "username": "hicintukadidier@gmail.com",
-      "password": "345",
-      "role": "infirmière",
-      "imageUrl": "C:\\fakepath\\WhatsApp Image 2020-12-29 at 13.50.45.jpeg",
-      "id": 2
+      "username": "hicintukacarmel@skynet-burundi.bi",
+      "password": "123",
+      "photo": "assets//4.jpg",
+      "role": "secretaire"
     }
   ]
 }

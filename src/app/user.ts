@@ -7,6 +7,6 @@ export interface User
     email: string;
     username: string;
     password: string;
-    imageUrl: string;
+    photo: string;
     role: Role;
 }

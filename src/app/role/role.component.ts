@@ -15,10 +15,14 @@ export class RoleComponent implements OnInit {
   public roles?: Role[];
   public roleDelete?: Role | null;
   public roleUpdate?: Role | null;
+  public fullname?: string;
+  public photo?: string;
 
   constructor(private clinixService: ClinixServiceService) { }
 
   ngOnInit(): void {
+    this.fullname = localStorage.getItem('fullname')!;
+    this.photo = localStorage.getItem('photo')!;
     this.getRoles();
   }
 

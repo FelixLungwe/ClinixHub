@@ -30,11 +30,11 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="menu/user7-128x128.jpg" class="img-circle elevation-2" alt="aaa">
+            <img src="./../../{{ photo }}" class="img-circle elevation-2" style="width: 50px;height: 50px;" alt="aaa">
             <i class="fa fa-user-o" aria-hidden="true"></i>
           </div>
           <div class="info">
-            <a href="#" class="d-block">AWAZI Ismael</a>
+            <a href="#" data-toggle="modal" data-target="#logout" class="d-block">{{ fullname }}</a>
           </div>
         </div>
   
@@ -58,6 +58,12 @@
                     <p>Listes roles</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                    <a routerLink="/users" class="nav-link">
+                      <i class="fa fa-users"></i>
+                      <p>Listes utilisateurs</p>
+                    </a>
+                </li>
               </ul>
             </li>
             
@@ -70,40 +76,45 @@
                  with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <p>
-                   Dossier patient
+                  <i class="far fa-file-alt"></i>
+                <p> 
+                  Service acceuil
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a class="nav-link">
-                    <i class="fa fa-users"></i>
-                    <p>Listes patients</p>
-                  </a>
-                </li>
-                <!-- <li class="nav-item">
-                  <a class="nav-link">
-                    <i class="fa fa-book" aria-hidden="true"></i>
-                    <p>Listes </p>
+                  <a routerLink="/patients" class="nav-link">
+                    <i class="far fa-file-alt"></i>
+                    <p>fiche patients</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a   class="nav-link">
-                    <i class="fa fa-book" aria-hidden="true"></i>
-                    <p>Listes bon de commande</p>
+                  <a routerLink="/acceuil" class="nav-link">
+                    <i class="far fa-file-alt"></i>
+                    <p>liste d'acceuil</p>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a  class="nav-link">
-                    <i class="fa fa-book" aria-hidden="true"></i>
-                    <p>Listes facture</p>
-                  </a>
-                </li> -->
+              </li>
               </ul>
             </li>
             
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                  <i class="fas fa-tag"></i>
+                <p>
+                  Service consultation
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a routerLink="/consultation" class="nav-link">
+                    <i class="fas fa-tag"></i>
+                    <p>consultation</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
         
@@ -111,8 +122,7 @@
       </div>
       <!-- /.sidebar -->
     </aside>
-    
-    <!-- Content Wrapper. Contains page content -->
+       <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       
@@ -195,7 +205,29 @@
 
         <!-- Default box -->
         <!-- <router-outlet> </router-outlet> -->
-        
+          <!-- \\\\\\\\\ modal logout-->
+         <!-- <button type="button" data-toggle="modal" data-target="#logout"  class="btn btn-danger"  ><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</button> -->
+         <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Voulez-vous vous déconnecter?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">Cliquez sur Déconnexion si voulez mettre fin à votre session</div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-dismiss="modal">non</button>
+                <a routerLink="/login"><button  class="btn btn-danger" type="button" data-dismiss="modal">Déconnexion</button></a>
+              </div>
+            </div>
+          </div>
+         </div>
+         <!-- \\\\\\\\\\\ -->
+
+           
+           
         <!-- /.card -->
   
       </section>

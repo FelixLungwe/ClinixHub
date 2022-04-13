@@ -1,3 +1,5 @@
+import { Acceuil } from './acceuil';
+import { Patient } from './patient';
 import { Role } from './role';
 import { environment } from './../environments/environment';
 import { Injectable, Host } from '@angular/core';
@@ -44,11 +46,45 @@ export class ClinixServiceService {
     return this.http.put<Role>(this.apiURL+"/role/"+role.id, role);
   }
 
+  public updateUser(user: User) : Observable<User> {
+    return this.http.put<User>(this.apiURL+"/user/"+user.id, user);
+  }
+
   /**
    * deleteRole
    */
   public deleteRole(roleId: number) : Observable<void>{
     return this.http.delete<void>(this.apiURL+"/role/"+roleId);
   }
+
+  public deleteUser(userId: number) : Observable<void>{
+    return this.http.delete<void>(this.apiURL+"/user/"+userId);
+  }
+
+  //------------// patient //-------------------------//
+  /**
+   * getPatients
+   */
+  public getPatients() : Observable<Patient[]>{
+    return this.http.get<Patient[]>(this.apiURL+"/patient")
+  }
+  //------------// end patient //--------------------//
+
+  //------------// acceuil //-------------------------//
+
+  /**
+   * getAcceuil
+   */
+  public getAcceuil() : Observable<Acceuil[]> {
+    return this.http.get<Acceuil[]>(this.apiURL+"/acceuil");
+  }
+
+  /**
+   * addAcceuil
+   */
+  public addAcceuil(acceuil: Acceuil) : Observable<Acceuil> {
+    return this.http.post<Acceuil>(this.apiURL+"/acceuil", acceuil);
+  }
+  //------------// end acceuil //--------------------//
    
 }
