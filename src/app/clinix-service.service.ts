@@ -62,11 +62,20 @@ export class ClinixServiceService {
   }
 
   //------------// patient //-------------------------//
+
+  /**
+   * addPatient
+   */
+  public addPatient(patient: Patient) : Observable<Patient> {
+    return this.http.post<Patient>(this.apiURL+"/clinix-SIH_api/patient", patient);
+  }
+
+
   /**
    * getPatients
    */
   public getPatients() : Observable<Patient[]>{
-    return this.http.get<Patient[]>(this.apiURL+"/patient")
+    return this.http.get<Patient[]>(this.apiURL+"/clinix-SIH_api/patient")
   }
   //------------// end patient //--------------------//
 
@@ -76,14 +85,35 @@ export class ClinixServiceService {
    * getAcceuil
    */
   public getAcceuil() : Observable<Acceuil[]> {
-    return this.http.get<Acceuil[]>(this.apiURL+"/acceuil");
+    return this.http.get<Acceuil[]>(this.apiURL+"/clinix-SIH_api/acceuil");
+  }
+
+  /**
+   * nbrAccueil
+   */
+  public nbrAccueil() : Observable<number>{
+    return this.http.get<number>(this.apiURL+"/clinix-SIH_api/nbreAccueils");
+  }
+
+  /**
+   * getPatientByAccueil
+   */
+  public getPatientByAccueil() : Observable<Patient[]>{
+    return this.http.get<Patient[]>(this.apiURL+"/clinix-SIH_api/getPatientByAccueil");
+  }
+
+  /**
+   * changeStatePatient
+   */
+  public changeStatePatient(idAccueil: number) : Observable<void>{
+    return this.http.post<void>(this.apiURL+"/clinix-SIH_api/acceuil/patient/"+idAccueil,null);
   }
 
   /**
    * addAcceuil
    */
-  public addAcceuil(acceuil: Acceuil) : Observable<Acceuil> {
-    return this.http.post<Acceuil>(this.apiURL+"/acceuil", acceuil);
+  public addAcceuil(acceuil: Acceuil, idPatient: number) : Observable<void> {
+    return this.http.post<void>(this.apiURL+"/clinix-SIH_api/acceuil/"+idPatient, acceuil);
   }
   //------------// end acceuil //--------------------//
    

@@ -14,7 +14,7 @@ import { NgForm } from '@angular/forms';
 export class PatientComponent implements OnInit {
 
   public patients?: Patient[];
-
+  public idPatient?: number;
 
   public fullname?: string;
   public photo?: string;
@@ -28,6 +28,24 @@ export class PatientComponent implements OnInit {
     this.getPatients();
     this.tooltip();
   }
+
+  public onModalOpenAccueil(idPatient: any, mode: string) {
+    const container = document.getElementById('main-container')!;
+    const button = document.createElement('button');
+    button.setAttribute('data-toggle', 'modal');
+    button.type = 'button';
+    button.style.display = 'none';
+
+
+    if (mode === 'add') {
+      this.idPatient = idPatient;
+      button.setAttribute('data-target', '#acceuil')
+    }
+
+    container.appendChild(button);
+    button.click();
+  }
+
 
   /**
    * getPatients
@@ -47,13 +65,14 @@ export class PatientComponent implements OnInit {
   /**
    * addAcceuil
    */
-  public addAcceuil(acceuil: NgForm) {
+  public onAddAcceuil(addForm: NgForm) {
     const b = document.getElementById('add-accueil')!;
     b.click();
-
-    this.clinixService.addAcceuil(acceuil.value).subscribe(
-      (response: Acceuil)=>{
-        acceuil.resetForm();
+    console.log(addForm.value);
+    
+    this.clinixService.addAcceuil(addForm.value, this.idPatient!).subscribe(
+      (response: void)=>{
+        addForm.resetForm();
       },
       (error: HttpErrorResponse)=>{
         console.log(error);
@@ -75,6 +94,23 @@ export class PatientComponent implements OnInit {
     if (results.length === 0 || !key) {
        this.getPatients();
     }
+  }
+
+  /**
+   * onAddPatient
+   */
+  public onAddPatient(addForm: NgForm) {
+    const b = document.getElementById('addPatient')!;
+    b.click();
+    this.clinixService.addPatient(addForm.value).subscribe(
+      (response: Patient) => {
+        console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        addForm.reset();
+      }
+    );
   }
 
   /**
