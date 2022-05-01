@@ -13,18 +13,37 @@ import { NgForm } from '@angular/forms';
 export class RoleComponent implements OnInit {
 
   public roles?: Role[];
-  public roleDelete?: Role | null;
-  public roleUpdate?: Role | null;
+  public role?: Role;
+  public roleId?: number;
   public fullname?: string;
   public photo?: string;
 
-  constructor(private clinixService: ClinixServiceService) { }
+  constructor(public clinixService: ClinixServiceService) { }
 
   ngOnInit(): void {
-    this.fullname = localStorage.getItem('fullname')!;
-    this.photo = localStorage.getItem('photo')!;
+    let userName = localStorage.getItem('username');
+    this.getUser(userName!);
+
     this.getRoles();
   }
+
+
+  /**
+   * getUser
+   */
+  public getUser(userName: string) {
+    this.clinixService.getUser(userName).subscribe(
+      (response: User)=>{
+          // localStorage.setItem('photo', response.urlPicture);
+          this.photo = response.urlPicture;
+          this.fullname = response.fullName;
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
+
 
   public onAddUser(addForm: NgForm) : void {
     const b = document.getElementById('add-user')!;
@@ -75,7 +94,7 @@ export class RoleComponent implements OnInit {
     );
   }
 
-  public onOpenModalRole(role:Role | null, mode: string) {
+  public onOpenModalRole(role: Role, mode: string) {
     const container = document.getElementById('main-container')!;
     const button = document.createElement('button');
     button.setAttribute('data-toggle', 'modal');
@@ -84,12 +103,12 @@ export class RoleComponent implements OnInit {
 
 
     if (mode === 'update') {
-      this.roleUpdate = role;
+      this.role = role;
       button.setAttribute('data-target', '#updateRole')
     }
 
     if (mode === 'delete') { 
-      this.roleDelete = role;
+      this.roleId = role.id;
       button.setAttribute('data-target', '#deleteRole')
     }
 
@@ -100,7 +119,6 @@ export class RoleComponent implements OnInit {
   public onUpdateRole(role: Role) : void {
     const b = document.getElementById('update-role')!;
     b.click();
-
     this.clinixService.updateRole(role).subscribe(
       (response: Role)=>{
         this.getRoles();
@@ -111,9 +129,9 @@ export class RoleComponent implements OnInit {
     );
   }
 
-  public onDeleteRole(roleId: any) : void {
+  public ondeleteRole(roleId?: number) : void {
 
-    this.clinixService.deleteRole(roleId).subscribe(
+    this.clinixService.deleteRole(roleId!).subscribe(
       (response: void)=>{
         this.getRoles();
       },

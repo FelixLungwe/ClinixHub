@@ -12,15 +12,16 @@ import { UserComponent } from './user/user.component';
 import { PatientComponent } from './patient/patient.component';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { ConsultationComponent } from './consultation/consultation.component'; 
+import { ClinixGuard } from './clinix.guard';
 
 const routes: Routes = [
   { path: "login", component: AuthComponent },
-  { path: "roles", component: RoleComponent },
-  { path: "acceuil", component: AcceuilComponent },
-  { path: "patients", component: PatientComponent },
-  { path: "menu", component: MenuComponent },
-  { path: "users", component: UserComponent },
-  { path: "consultation", component: ConsultationComponent },
+  { path: "roles", component: RoleComponent , canActivate: [ClinixGuard] },
+  { path: "acceuil", component: AcceuilComponent, canActivate: [ClinixGuard]  },
+  { path: "patients", component: PatientComponent, canActivate: [ClinixGuard]  },
+  { path: "menu", component: MenuComponent, canActivate: [ClinixGuard] },
+  { path: "users", component: UserComponent, canActivate: [ClinixGuard]  },
+  { path: "consultation", component: ConsultationComponent, canActivate: [ClinixGuard]  },
   { path: "", redirectTo: "/menu", pathMatch: "full"},
   { path: "**", component: AuthComponent}
 ];

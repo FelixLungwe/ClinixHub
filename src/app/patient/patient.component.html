@@ -190,9 +190,9 @@
                         <!-- milieu -->
 
                         <!-- modal nouveau patient -->
-                        <!-- <div class="modal fade" id="addPatient" >
+                        <div class="modal fade" id="addPatient" >
                                 <div class="modal-dialog ">
-                                    <form #addForm="ngForm"  (ngSubmit) = "onAddPatient(addForm)">
+                                    <form #addFormPatient="ngForm"  (ngSubmit) = "onAddPatient(addFormPatient)">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <span class="text-muted"><i class="fas fa-arrow-circle-right"></i> Nouveau patient</span>
@@ -361,13 +361,13 @@
                                             </div>
                                     </form>
                                 </div>
-                        </div> -->
+                        </div>
                         <!-- end modal nouveau patient -->
 
                         <!-- modal acceuil -->
                         <div class="modal fade" id="acceuil" >
                                 <div class="modal-dialog ">
-                                    <form #addForm="ngForm" (ngSubmit)="onAddAcceuil(addForm)">
+                                    <form #addFormAcceuil="ngForm" (ngSubmit)="onAddAcceuil(addFormAcceuil)">
                                             <div class="modal-content">
                                                     <div class="modal-header">
                                                             <span class="text-muted"><i class="fas fa-arrow-circle-right"></i>  Acceuil</span>
@@ -458,7 +458,7 @@
                                                     </div>
                                                     <div class="modal-footer justify-content-between">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button type="submit" [disabled]="addForm.invalid"  class="btn btn-primary">Ajouter</button>
+                                                            <button type="submit" [disabled]="addFormAcceuil.invalid"  class="btn btn-primary">Ajouter</button>
                                                     </div>
                                                 </div>
                                     </form>

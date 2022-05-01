@@ -105,6 +105,7 @@ export class PatientComponent implements OnInit {
     this.clinixService.addPatient(addForm.value).subscribe(
       (response: Patient) => {
         console.log(response);
+        this.getPatients();
       },
       (error: HttpErrorResponse) => {
         console.log(error);

@@ -1,9 +1,10 @@
+import { User } from './../user';
 import { ClinixServiceService } from './../clinix-service.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { User } from '../user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-auth',
@@ -13,43 +14,42 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
-  public user?: User;
-  public users?: User[];
-  public isAuth: boolean = false;
-  public isOk: boolean = true;
+
+  public mode!: number;
 
   constructor(private clinixService: ClinixServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    localStorage.removeItem('photo');localStorage.removeItem('jwtToken');localStorage.removeItem('username');localStorage.removeItem('role');
   }
 
+  
+
   /**
-   * onAuth
+   * onAuthentication
    */
-  public onAuth(form: NgForm) {
-    this.clinixService.getUsers().subscribe(
-      (response: User[])=>{
-        this.users = response;
-        for(let user of this.users){
-          if (user.email === form.value['email'] && user.password === form.value['password']) {
-            localStorage.setItem('username', user.email);
-            localStorage.setItem('fullname', user.fullname);
-            localStorage.setItem('photo', user.photo);
-            // this.router.navigate(['/menu']);
-            this.router.navigateByUrl('/menu');
-            this.isOk = false;
-          }
-        }
-       if (this.isOk === true) {
-        this.isAuth = true;
-        setTimeout(() => {
-          this.isAuth = false;
-        }, 5000);
-       }
+  public onAuthentication(addForm: NgForm) {
+    this.clinixService.authentication(addForm.value).subscribe(
+      (response: any)=>{
+        localStorage.setItem('jwtToken', response.headers.get("Authorization"));
+        let jwtHelper = new JwtHelperService();
+        let jwt = localStorage.getItem('jwtToken');
+        let jwtObject = jwtHelper.decodeToken(jwt!);
+        localStorage.setItem('username', jwtObject.sub);
+        localStorage.setItem('role', jwtObject.roles);
+
+        addForm.reset();
+
+        this.router.navigateByUrl("/menu");
       },
       (error: HttpErrorResponse)=>{
         console.log(error);
+        this.mode = 1;
+        setTimeout(() => {
+          this.mode = 2;
+        }, 3000);
       }
     );
   }
+
 }

@@ -30,7 +30,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="./../../{{ photo }}" class="img-circle elevation-2" style="width: 50px;height: 50px;" alt="aaa">
+            <img src="{{ clinixService.apiURL+'/clinix-SIH_api/download/'+photo }}" class="img-circle elevation-2" style="width: 50px;height: 50px;" alt="">
             <i class="fa fa-user-o" aria-hidden="true"></i>
           </div>
           <div class="info">
@@ -44,7 +44,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview">
-              <a href="/#" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="fa fa-user-plus"></i>
                 <p>
                    Gestion utilisateurs

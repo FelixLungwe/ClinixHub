@@ -30,7 +30,7 @@
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
               <div class="image">
-                <img src="./../../{{ photo }}" style="width: 50px;height: 50px;" class="img-circle elevation-2" alt="aaa">
+                <img src="{{ clinixService.apiURL+'/clinix-SIH_api/download/'+photo }}" style="width: 50px;height: 50px;" class="img-circle elevation-2" alt="aaa">
                 <i class="fa fa-user-o" aria-hidden="true"></i>
               </div>
               <div class="info">
@@ -72,8 +72,6 @@
       
             <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
                      <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="far fa-file-alt"></i>
@@ -115,24 +113,19 @@
                           </li>
                         </ul>
                       </li>
-                
               </ul>
             </nav>
-            
-            <!-- /.sidebar-menu -->
           </div>
           <!-- /.sidebar -->
         </aside>
         
-        <!-- Content Wrapper. Contains page content -->
+        <!-- Contains page content -->
         <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          
       
           <!-- Main content -->
           <section class="content">
-            <!-- ////////////// -->
-            <!-- ////modal logout -->
+            
+            <!--modal logout -->
             <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -150,575 +143,250 @@
                 </div>
               </div>
              </div>
-             <!-- ////// end modal logout -->
+             <!-- end modal logout -->
+
+             <!-- content-header -->
             <section class="content-header">
-                    <div class="container-fluid">
-                      <div class="row mb-2">
-                        <div class="col-sm-6">
-                          <!-- <h1>Yobora-Soft | Dashboard</h1> -->
-                          <button type="button" class="btn btn-primary" href="#add" data-toggle="modal"><i class="fas fa-plus"></i> ajouter role</button>
-                          <!-- modal  add client-->
-                          <div class="modal fade" id="add" >
-                                <div class="modal-dialog ">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-primary" href="#addRole" data-toggle="modal">
+                      <i class="fas fa-plus"></i>
+                      ajouter role</button>
+
+                    <!-- modal  add role-->
+                    <div class="modal fade" id="addRole" >
+                        <div class="modal-dialog ">
+                            <form #addFormRole="ngForm" (ngSubmit)="onSaveRole(addFormRole)">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" id="add-role">x</button>
-                                            <!-- <h4 class="modal-title" style="margin-left:10px">Plus d'informations</h4> -->
-                                        </div> 
-                                        <div class="modal-body">
-                                            <!-- <div class="container-fluid"> -->
-                                                <!-- <div class="container validation"> -->
-                                                    <!-- <div class="row"> -->
-                                                                 <!-- <div class="col-lg-5">  -->
-                                                                    <div class="card card-primary">
-                                                                        <div class="card-header">
-                                                                          <h3 class="card-title">ajouter role</h3>
-                                                                        </div>
-                                                                        <!-- /.card-header -->
-                                                                        <!-- form start -->
-                                                                        <form #addForm="ngForm" (ngSubmit) = "onSaveRole(addForm)">
-                                                                          <div class="card-body">
-                                                                            <div class="card-body text-muted">
-                                                                            <div class="form-group">
-                                                                                    <label for="exampleInputEmail1">profil</label>
-                                                                                    <input type="text" ngModel class="form-control" name="roleName" id=""  required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                    <label for="exampleInputEmail1">commentaire</label>
-                                                                                    <input type="text" ngModel class="form-control" name="commentaire" id=""  required>
-                                                                            </div>
-                                                                            <!-- <div class="form-group">
-                                                                              <label for="exampleInputEmail1">email</label>
-                                                                              <input type="email" ngModel class="form-control" name="email" id="email"  required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">telephone</label>
-                                                                                <input type="text" ngModel class="form-control" name="telephone" id="telephone"  required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">adresse</label>
-                                                                                <input type="text" ngModel class="form-control" name="adresse" id="email"  required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">forme juridique</label>
-                                                                                <input type="text" ngModel class="form-control" name="forme_juridique" id="phone"  required>
-                                                                            </div> -->
-                                                                            <!-- <div class="form-group">
-                                                                                <label for="exampleInputEmail1">imageUrl</label>
-                                                                                <input type="text" ngModel class="form-control" name="imageURL" id="phone" required>
-                                                                            </div> -->
-                                                                            <!-- <div class="form-group">
-                                                                                <label for="exampleInputEmail1">employe code</label>
-                                                                                <input type="text" ngModel class="form-control" name="employeCode" id="phone"  required>
-                                                                            </div> -->
-                                                                            
-                                                                            
-                                                                        </div>
-                                                                            <!-- <div class="form-check">
-                                                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                                                            </div> -->
-                                                                        </div>
-                                                                        <!-- /.card-body -->
-                                                                        
-                                                                        <div class="card-footer">
-                                                                            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >ajouter</button>
-                                                                        </div>
-                                                                    </form>
+                                            <div class="modal-header">
+                                                    <span class="text-muted"><i class="fas fa-arrow-circle-right"></i>  Rôle</span>
+                                                <button type="button" class="close" data-dismiss="modal" id="add-role">x</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title text-muted">Informations générales</h3>
+                                                    
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- contenu card -->
+                                                        <div class="card-body p-0 text-muted" style="margin: 10px;">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Commentaire *</label>
+                                                                        <input type="text" ngModel name="commentaire" class="form-control" required placeholder=" ---" >
+                                                                    </div>
                                                                 </div>
-                                                                <!-- </div>  -->
-                                                            <!-- </div> -->
-                                                            <!-- </div> -->
-                                                            <!-- </div> -->
-                                                            <!-- </div> -->
-                                                            <!-- <div class="modal-footer">
-                                                                <button class="btn btn-info" data-dismiss="modal">Fermer</button>
-                                                            </div> -->
+                                                                <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                          <label>Type de rôle *</label>
+                                                                          <select ngModel name="roleName" class="form-control">
+                                                                            <option> --- </option>
+                                                                            <option>Medecin généraliste</option>
+                                                                            <option>Infirmier</option>
+                                                                            <option>Caissier</option>
+                                                                            <option>Administrateur</option>
+                                                                            <option>Pharmacien</option>
+                                                                            <option>Laboratin</option>
+                                                                            <option>Stagiaire</option>
+                                                                            <option>Sage femme</option>
+                                                                            <option>Psychologue</option>
+                                                                            <option>Kinesithérapeute</option>
+                                                                            <option>Psychanalyste</option>
+                                                                            <option>Ophtalmologue</option>
+                                                                            <option>ORLogue</option>
+                                                                            <option>Pédiatre</option>
+                                                                            <option>Urgentiste</option>
+                                                                            <option>Cardiologue</option>
+                                                                          </select>
+                                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end contenu card -->
+                                                        <div class="card-footer text-center">
+                                                            <span class="text-danger">*tous les champs marqués sont obligatoires</span>
                                                         </div>
                                                     </div>
-                            </div>
-                            </div>
-                          <!-- end modal add client -->
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" [disabled]="addFormRole.invalid"  class="btn btn-primary">Ajouter</button>
+                                            </div>
+                                        </div>
+                            </form>
                         </div>
-                        <div class="col-sm-6">
-                          <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a routerLink="/menu">Home</a></li>
-                            <li class="breadcrumb-item active">gestion roles</li>
-                          </ol>
-                        </div>
-                      </div> 
-                    </div><!-- /.container-fluid -->
-                  </section>
-            
-            
-            <div class="container-fluid" id="main-container">
-                <div class="row">
-                  <div class="col-12">
-                        
-                    <!-- /.card -->
-            
-                    <div class="card">
-                      <div class="card-header">
-                        <h3 class="card-title text-muted">Listes de roles</h3>
-                        <!-- <div id="example1_filter" class="dataTables_filter"> -->
-                        <input type="search" style="width: 172px;margin-top: -3px;margin-left: 1022px;" class="form-control form-control-sm" placeholder="Search" aria-controls="example1">
-                        <!-- </div> -->
+                    </div>
+                    <!-- end modal add role -->
+
+                  </div>
+                  <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a routerLink="/menu">Home</a></li>
+                      <li class="breadcrumb-item active">gestion roles</li>
+                    </ol>
+                  </div>
+                </div>
+
+                 <!-- tableau role -->
+                 <div class="card text-muted main-container">
+                    <div class="card-header border-transparent">
+                      <h3 class="card-title">Rôle</h3>
+                  
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                          <i class="fas fa-times"></i>
+                        </button>
                       </div>
-                      <!-- /.card-header -->
-                      <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                    </div>
+                    <div class="card-body p-0">
+                      <div class="table-responsive">
+                        <table class="table table-striped m-0">
                           <thead>
-                          <tr class="text-muted">
-                            <th>Profil</th>
-                            <th>Commentaire</th>
-                            <!-- <th>email</th>
-                            <th>telephone</th>
-                            <th>adresse</th>
-                            <th>forme juridique</th> -->
-                            
-                          </tr>
+                            <tr>
+                              <th>rôle</th>
+                              <th>commentaire</th>
+                              <th></th>
+                              <th></th>
+                            </tr>
                           </thead>
                           <tbody>
-                          <tr *ngFor="let role of roles">
-                            <td>{{ role.roleName }}</td>
-                            <td>{{ role.commentaire }}</td>
-                           <td>
-                            <button type="button" data-target="#addPermission" data-toggle="modal" class="btn btn-outline-info"><i class="fas fa-plus"></i> permission</button>
-                           </td>
-                            <td>
-                                <!-- <button type="button"   class="btn btn-info">user</button> -->
-                                <button type="button" data-target="#addUser" data-toggle="modal" class="btn btn-outline-success"><i class="fas fa-plus"></i> user</button>
-                            </td>
-                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Info</h5>
-                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">voulez vous supprimer ce client?</div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-secondary" type="button" data-dismiss="modal">non</button>
-                                      <button  class="btn btn-danger" type="button" data-dismiss="modal">oui</button>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <td><button type="button" (click)="onOpenModalRole(role, 'update')" class="btn btn-warning"><i class="fas fa-edit"></i> update</button></td>
-                            <!-- <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Info</h5>
-                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">voulez vous supprimer ce client?</div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-secondary" type="button" data-dismiss="modal">non</button>
-                                      <button  class="btn btn-danger" type="button" data-dismiss="modal">oui</button>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div> -->
-                            <td><button type="button"  class="btn btn-danger" (click)="onOpenModalRole(role, 'delete')" ><i class="far fa-trash-alt"></i> delete</button></td>
-                            <div class="modal fade" id="deleteRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Info</h5>
-                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">voulez vous supprimer ce role?</div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-warning" type="button" data-dismiss="modal">non</button>
-                                      <button (click)="onDeleteRole(roleDelete?.id)" class="btn btn-danger" type="button" data-dismiss="modal">oui</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            <!-- modal  add user-->
-            <div class="modal fade" id="addUser" >
-                <div class="modal-dialog ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" id="add-user">x</button>
-                            <!-- <h4 class="modal-title" style="margin-left:10px">Plus d'informations</h4> -->
-                        </div> 
-                        <div class="modal-body">
-                            <!-- <div class="container-fluid"> -->
-                                <!-- <div class="container validation"> -->
-                                    <!-- <div class="row"> -->
-                                                 <!-- <div class="col-lg-5">  -->
-                                                    <div class="card card-primary">
-                                                        <div class="card-header">
-                                                          <h3 class="card-title">ajouter utilisateur</h3>
-                                                        </div>
-                                                        <!-- /.card-header -->
-                                                        <!-- form start -->
-                                                        <form #addForm="ngForm" (ngSubmit) = "onAddUser(addForm)">
-                                                          <div class="card-body">
-                                                            <div class="card-body text-muted">
-                                                            <div class="form-group">
-                                                                    <label for="exampleInputEmail1">nom complet</label>
-                                                                    <input type="text" ngModel class="form-control" name="fullname" id="fullname"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                    <label for="exampleInputEmail1">email</label>
-                                                                    <input type="email" ngModel class="form-control" name="email" id="email"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                            <label for="exampleInputEmail1">username</label>
-                                                                            <input type="text" ngModel class="form-control" name="username" id="username"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">password</label>
-                                                                                <input type="password" ngModel class="form-control" name="password" id="password"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                    <label>role</label>
-                                                                    <select class="form-control" ngModel name="role">
-                                                                      <option *ngFor="let r of roles">{{ r.roleName }}</option>
-                                                                      <!-- <option>option 2</option> -->
-                                                                      <!-- <option>option 3</option> -->
-                                                                      <!-- <option>option 4</option> -->
-                                                                      <!-- <option>option 5</option> -->
-                                                                    </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                    <label for="exampleInputFile">photo</label>
-                                                                    <div class="input-group">
-                                                                      <div class="custom-file">
-                                                                        <input type="file" class="custom-file-input" ngModel name="photo" id="exampleInputFile">
-                                                                        <label class="custom-file-label" for="exampleInputFile">Choisissez votre photo</label>
-                                                                      </div>
-                                                                    </div>
-                                                            </div>
-                                                            <!-- <div class="form-group">
-                                                                <label for="exampleInputEmail1">prix unitaire htc</label>
-                                                                <input type="text" ngModel class="form-control" name="prix_unitaire_htc" id="telephone"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">prix total htc</label>
-                                                                <input type="text" ngModel class="form-control" name="prix_total_htc" id="email"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">prix total ttc</label>
-                                                                <input type="text" ngModel class="form-control" name="prix_total_ttc" id="phone"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                    <label for="exampleInputEmail1">taux tva</label>
-                                                                    <input type="text" ngModel class="form-control" name="taux_tva" id="phone"  required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                              <label for="exampleInputEmail1">quantite</label>
-                                                              <input type="text" ngModel class="form-control" name="quantite" id="email"  required>
-                                                            </div> -->
-                                                            <!-- <div class="form-group">
-                                                                        <label for="exampleInputEmail1">date facturation</label>
-                                                                        <input type="date" ngModel class="form-control" name="date_facturation" id="phone"  required>
-                                                            </div> -->
-                                                        </div>
-                                                        </div>
-                                                        <!-- /.card-body -->
-                                                        <div class="card-footer">
-                                                            <button [disabled] = "addForm.invalid" type="submit" class="btn btn-primary" >ajouter</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- </div>  -->
-                                            <!-- </div> -->
-                                            <!-- </div> -->
-                                            <!-- </div> -->
-                                            <!-- </div> -->
-                                            <!-- <div class="modal-footer">
-                                                <button class="btn btn-info" data-dismiss="modal">Fermer</button>
-                                            </div> -->
-                                        </div>
-                                    </div>
-            </div>
-            </div>
-
-            <!-- modal add permission -->
-            <div class="modal fade" id="addPermission">
-              <div class="modal-dialog ">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <span class="text-muted"><i class="fas fa-arrow-circle-right"></i> Role - Permissions</span>
-                    <button type="button" class="close" data-dismiss="modal" id="add-user"><i class="fas fa-times"></i></button>
-                  </div>
-                  <div class="modal-body">
-                    <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
-                        <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title text-muted">Ajouter des permissions</h3>
-              
-                              <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                  <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                  <i class="fas fa-times"></i>
-                                </button>
-                              </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body p-0" style="display: block;">
-                              <ul class="products-list product-list-in-card pl-2 pr-2">
-                                <li class="item">
-                                  <div class="product-img">
-                                      <div class="form-group clearfix">
-                                        <div class="icheck-info d-inline">
-                                          <input type="checkbox" id="checkboxInfo1">
-                                          <label for="checkboxInfo1">
-                                          </label>
-                                        </div>
-                                      </div>
-                                  </div>
-                                  <div class="product-info">
-                                      <div class="icheck-info d-inline">
-                                        <label for="checkboxInfo1">
-                                          <span class="badge badge-info">consulter</span>
-                                        </label>
-                                      </div>
-                                      
-                                      <span class="badge badge-info float-right"><i class="fas fa-search"></i></span>
-                                      <span class="product-description">
-                                        permet de rechercher vos données.
-                                      </span>
-                                  </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                  <div class="product-img">
-                                      <div class="form-group clearfix">
-                                          <div class="icheck-danger d-inline">
-                                            <input type="checkbox" id="checkboxDanger2">
-                                            <label for="checkboxDanger2">
-                                            </label>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="product-info">
-                                      <div class="icheck-danger d-inline">
-                                          <label for="checkboxDanger2">
-                                            <span class="badge badge-danger">supprimer</span>
-                                          </label>
-                                      </div>
-    
-                                      <span class="badge badge-danger float-right"><i class="far fa-trash-alt"></i></span>
-                                      <span class="product-description">
-                                        permet de supprimer vos données.
-                                      </span>
-                                  </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                  <div class="product-img">
-                                      <div class="form-group clearfix">
-                                          <div class="icheck-warning d-inline">
-                                            <input type="checkbox" id="checkboxPrimary3">
-                                            <label for="checkboxPrimary3">
-                                            </label>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="product-info">
-                                      <div class="icheck-primary d-inline">
-                                          <label for="checkboxPrimary3">
-                                            <span class="badge badge-warning">modifier</span>
-                                          </label>
-                                      </div>
-    
-                                      <span class="badge badge-warning float-right"><i class="fas fa-edit"></i></span>
-                                      <span class="product-description ">
-                                          permet de modifier vos données.
-                                      </span>
-                                  </div>
-                                </li>
-                                <!-- /.item -->
-                                <li class="item">
-                                  <div class="product-img">
-                                      <div class="form-group clearfix">
-                                          <div class="icheck-success d-inline">
-                                            <input type="checkbox" id="checkboxPrimary4">
-                                            <label for="checkboxPrimary4">
-                                            </label>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="product-info">
-                                      <div class="icheck-primary d-inline">
-                                          <label for="checkboxPrimary4">
-                                            <span class="badge badge-success">ajouter</span>
-                                          </label>
-                                      </div>
-    
-                                      <span class="badge badge-success float-right"><i class="fas fa-plus"></i></span>
-                                      <span class="product-description">
-                                          permet d'ajouter des données.
-                                      </span>
-                                  </div>
-                                </li>
-                                <!-- /.item -->
-                              </ul>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer text-center" style="display: block;">
-                                <button  type="submit" class="btn btn-primary" style="margin-left: 361px;">ajouter</button>
-                            </div>
-                            <!-- /.card-footer -->
-                          </div>
-                    </form>
-                   
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end modal add permission -->
-            
-            <!-- end modal add client -->
-                          </tr>
+                            <tr *ngFor="let role of roles">
+                              <td class="text-primary">{{ role?.roleName }}</td>
+                              <td>{{ role?.commentaire }}</td>
+                              <td><span (click)="onOpenModalRole(role, 'delete')"><i class="far fa-trash-alt"></i></span></td>
+                              <td><span (click)="onOpenModalRole(role, 'update')"><i class="fas fa-edit"></i></span></td>
+                            </tr>
                           </tbody>
-                          <tfoot>
-                          <tr class="text-muted">
-                                <th>Profil</th>
-                                <th>Commentaire</th>
-                                <!-- <th>email</th>
-                                <th>telephone</th>
-                                <th>adresse</th>
-                                <th>forme juridique</th> -->
-                          </tr>
-                          </tfoot>
                         </table>
                       </div>
-                      <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                   </div>
-                  <!-- /.col -->
-                </div>
-                <!-- /.row -->
-                
-              </div>
-              
-            
-              <!-- modal -->
-            
-            
-            
-             <!-- modal update client -->
-             <div class="modal fade" id="updateRole">
-                <div class="modal-dialog ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">x</button>
-                            <!-- <h4 class="modal-title" style="margin-left:10px">Plus d'informations</h4> -->
-                        </div> 
-                        <div class="modal-body">
-                             <!-- <div class="container-fluid"> -->
-                                        <!-- <div class="container validation"> -->
-                                            <!-- <div class="row"> -->
-                                                 <!-- <div class="col-lg-5">  -->
-                                                    <div class="card card-primary">
-                                                        <div class="card-header">
-                                                          <h3 class="card-title">update role</h3>
-                                                        </div>
-                                                        <!-- /.card-header -->
-                                                        <!-- form start -->
-                                                        <form #editForm="ngForm" >
-                                                          <div class="card-body">
-                                                            <div class="card-body text-muted">
-                                                                        <div class="form-group">
-                                                                            <input type="hidden" ngModel="{{ roleUpdate?.id }}"  name="id">
-            
-                                                                          </div>
-                                                                          <div class="form-group">
-                                                                              <label for="exampleInputEmail1">profil</label>
-                                                                              <input type="text" ngModel="{{ roleUpdate?.roleName }}" class="form-control" name="roleName" id="roleName"  required>
-                                                                          </div>
-                                                                          <div class="form-group">
-                                                                                <label for="exampleInputEmail1">commentaire</label>
-                                                                                <input type="text" ngModel="{{ roleUpdate?.commentaire }}" class="form-control" name="commentaire" id="commentaire"  required>
-                                                                        </div>
-                                                                        <!-- <div class="form-group">
-                                                                          <label for="exampleInputEmail1">email</label>
-                                                                          <input type="email" ngModel="" class="form-control" name="email" id="email"  required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputEmail1">telephone</label>
-                                                                            <input type="text" ngModel="" class="form-control" name="telephone" id="telephone"  required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputEmail1">adresse</label>
-                                                                            <input type="text" ngModel="" class="form-control" name="adresse" id="email"  required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="exampleInputEmail1">forme juridique</label>
-                                                                            <input type="text" ngModel="" class="form-control" name="forme_juridique" id="phone"  required>
-                                                                        </div> -->
-                                                             
-                                                             
-                                                            </div>
-                                                            <!-- <div class="form-check">
-                                                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                                            </div> -->
+                  <!-- end tableau role -->
+
+                  <!-- modal  update role-->
+                  <div class="modal fade" id="updateRole" >
+                      <div class="modal-dialog ">
+                          <form #editFormRole="ngForm">
+                                  <div class="modal-content">
+                                          <div class="modal-header">
+                                                  <span class="text-muted"><i class="fas fa-arrow-circle-right"></i>  Rôle</span>
+                                              <button type="button" class="close" data-dismiss="modal" id="add-role">x</button>
+                                          </div>
+                                          <div class="modal-body">
+                                                  <div class="card">
+                                                      <div class="card-header">
+                                                          <h3 class="card-title text-muted">Informations générales</h3>
+                                                  
+                                                          <div class="card-tools">
+                                                              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                                              </button>
+                                                              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                                              </button>
                                                           </div>
-                                                          <!-- /.card-body -->
-                                                        <div class="modal-footer">
-                                                            <button type="button" id="update-role" class="btn btn-secondary" data-dismiss="modal">annuler</button>
-                                                            <button type="button" (click)="onUpdateRole(editForm.value)"  class="btn btn-primary">Modifier</button>
-                                                        </div>
-                                                          <!-- <div class="card-footer">
-                                                          </div> -->
-                                                        </form>
                                                       </div>
-                                                 <!-- </div>  -->
-                                            <!-- </div> -->
-                                        <!-- </div> -->
-                                <!-- </div> -->
-                        <!-- </div> -->
-                        <!-- <div class="modal-footer">
-                            <button class="btn btn-info" data-dismiss="modal">Fermer</button>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-            </div>
-            <!-- end modal update client -->
-            
-            <!-- modal delete client -->
-            <div class="modal fade" id="deleteClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Info</h5>
-                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">voulez vous supprimer ce client?</div>
-                        <div class="modal-footer">
-                          <button class="btn btn-secondary" type="button" data-dismiss="modal">non</button>
-                          <button class="btn btn-danger" type="button" data-dismiss="modal">oui</button>
+                                                      <!-- contenu card -->
+                                                      <div class="card-body p-0 text-muted" style="margin: 10px;">
+                                                          <div class="row">
+                                                              <input type="hidden" ngModel="{{ role?.id }}" name="id" class="form-control">
+
+                                                              <div class="col-sm-6">
+                                                                  <div class="form-group">
+                                                                      <label>Commentaire *</label>
+                                                                      <input type="text" ngModel="{{ role?.commentaire }}" name="commentaire" class="form-control" required placeholder=" ---" >
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-sm-6">
+                                                                      <div class="form-group">
+                                                                        <label>Type de rôle *</label>
+                                                                        <select ngModel="{{ role?.roleName }}" name="roleName" class="form-control">
+                                                                          <option> --- </option>
+                                                                          <option>Medecin généraliste</option>
+                                                                          <option>Infirmier</option>
+                                                                          <option>Caissier</option>
+                                                                          <option>Administrateur</option>
+                                                                          <option>Pharmacien</option>
+                                                                          <option>Laboratin</option>
+                                                                          <option>Stagiaire</option>
+                                                                          <option>Sage femme</option>
+                                                                          <option>Psychologue</option>
+                                                                          <option>Kinesithérapeute</option>
+                                                                          <option>Psychanalyste</option>
+                                                                          <option>Ophtalmologue</option>
+                                                                          <option>ORLogue</option>
+                                                                          <option>Pédiatre</option>
+                                                                          <option>Urgentiste</option>
+                                                                          <option>Cardiologue</option>
+                                                                        </select>
+                                                                      </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <!-- end contenu card -->
+                                                      <div class="card-footer text-center">
+                                                          <span class="text-danger">*tous les champs marqués sont obligatoires</span>
+                                                      </div>
+                                                  </div>
+                                          </div>
+                                          <div class="modal-footer justify-content-between">
+                                                  <button type="button" id="update-role" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                                  <button type="button" (click)="onUpdateRole(editFormRole.value)"  class="btn btn-primary">Ajouter</button>
+                                          </div>
+                                      </div>
+                          </form>
+                      </div>
+                  </div>
+                  <!-- end modal update role -->
+
+                  <!--modal delete role -->
+                  <div class="modal fade" id="deleteRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" class="text-muted"><i class="fas fa-arrow-circle-right"></i> info</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body text-muted">Voulez-vous supprimer ce rôle?</div>
+                          <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">non</button>
+                            <button (click)="ondeleteRole(roleId)" class="btn btn-danger" type="button" data-dismiss="modal">supprimer</button>
+                          </div>
                         </div>
                       </div>
-                    </div>
                   </div>
-                  <!-- end modal delete client -->
+              
+                  <!-- end modal delete role -->
 
-            <!-- ////////////// -->
-      
+              </div>
+            </section>
+            <!-- end content-header -->
+
+
+            <!-- main-container -->
+            <div class="container-fluid" id="main-container">
+              <div class="row">
+                <div class="col-12">
+                   
+                </div>
+              </div>
+            </div>
+            <!-- end main-container -->
           </section>
-          <!-- /.content -->
+          <!-- end Main content -->
         </div>
-        <!-- /.content-wrapper -->
+        <!-- end Contains page content -->
       
         <footer class="main-footer">
           <div class="float-right d-none d-sm-block">

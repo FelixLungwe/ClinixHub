@@ -3,10 +3,10 @@ import { Role } from './role';
 export interface User
 {
     id: number;
-    fullname: string;
     email: string;
+    fullName: string;
     username: string;
     password: string;
-    photo: string;
-    role: Role;
+    urlPicture: string;
+    role: Array<Role>;
 }

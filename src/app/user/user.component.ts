@@ -2,6 +2,7 @@ import { User } from './../user';
 import { ClinixServiceService } from './../clinix-service.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user', 
@@ -17,7 +18,7 @@ export class UserComponent implements OnInit {
   public fullname?: string;
   public photo?: string;
 
-  constructor(private clinixService: ClinixServiceService) { }
+  constructor(private clinixService: ClinixServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.fullname = localStorage.getItem('fullname')!;
@@ -83,6 +84,9 @@ export class UserComponent implements OnInit {
         this.users = response;
       },
       (error: HttpErrorResponse)=>{
+        if (error.error.msg === "le token a expiré" && error.status === 403) {
+          this.router.navigateByUrl('/login');
+        }
         console.log(error);
       }
     );
