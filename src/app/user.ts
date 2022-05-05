@@ -7,6 +7,7 @@ export interface User
     fullName: string;
     username: string;
     password: string;
+    phone: string;
     urlPicture: string;
-    role: Array<Role>;
+    appRoles: Array<Role>;
 }

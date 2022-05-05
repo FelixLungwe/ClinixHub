@@ -35,6 +35,7 @@ export class AuthComponent implements OnInit {
         let jwtHelper = new JwtHelperService();
         let jwt = localStorage.getItem('jwtToken');
         let jwtObject = jwtHelper.decodeToken(jwt!);
+        
         localStorage.setItem('username', jwtObject.sub);
         localStorage.setItem('role', jwtObject.roles);
 

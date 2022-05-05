@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
 import { NgForm } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +35,14 @@ export class ClinixServiceService {
   /**
    * isLogged
    */
-  public isLogged() : boolean{
+  public isLogged() : boolean
+  {
     let jwt = localStorage.getItem('jwtToken');
-    if (jwt == null) {
+    let jwtHelper = new JwtHelperService();
+    let isExpired = jwtHelper.isTokenExpired(jwt!);
+
+    if (jwt == null || isExpired) 
+    {
       return false;
     }
     return true;
@@ -93,8 +99,14 @@ export class ClinixServiceService {
   /**
    * saveUser
    */
-  public saveUser(user: User) : Observable<User>{
-    return this.http.post<User>(this.apiURL+"/clinix-SIH_api/user", user);
+  public saveUser(user: User, id: number) : Observable<void>{
+    return this.http.post<void>(this.apiURL+"/clinix-SIH_api/user/"+id, user, {headers: this.getToken()});
+  }
+  // public saveUser(formData: FormData, id: number) : Observable<void>{
+  //   return this.http.post<void>(this.apiURL+"/clinix-SIH_api/user/"+id, formData, {headers: this.getToken()});
+  // }
+  public onAddPicture(formData: FormData) : Observable<string>{
+    return this.http.post<string>(this.apiURL+"/clinix-SIH_api/upload", formData, {headers: this.getToken()});
   }
 
   public updateRole(role: Role) : Observable<Role> {
@@ -102,7 +114,7 @@ export class ClinixServiceService {
   }
 
   public updateUser(user: User) : Observable<User> {
-    return this.http.post<User>(this.apiURL+"/clinix-SIH_api/user", user, {headers: this.getToken()});
+    return this.http.put<User>(this.apiURL+"/clinix-SIH_api/user", user, {headers: this.getToken()});
   }
 
   /**
@@ -113,7 +125,7 @@ export class ClinixServiceService {
   }
 
   public deleteUser(userId: number) : Observable<void>{
-    return this.http.delete<void>(this.apiURL+"/clinix-SIH_api/user/"+userId);
+    return this.http.delete<void>(this.apiURL+"/clinix-SIH_api/user/"+userId, {headers: this.getToken()});
   }
 
   //------------// patient //-------------------------//

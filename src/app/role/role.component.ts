@@ -1,3 +1,4 @@
+declare var $:any;
 import { User } from './../user';
 import { ClinixServiceService } from './../clinix-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class RoleComponent implements OnInit {
   public roleId?: number;
   public fullname?: string;
   public photo?: string;
+  public filename?: string;
 
   constructor(public clinixService: ClinixServiceService) { }
 
@@ -26,7 +28,7 @@ export class RoleComponent implements OnInit {
 
     this.getRoles();
   }
-
+  
 
   /**
    * getUser
@@ -48,13 +50,32 @@ export class RoleComponent implements OnInit {
   public onAddUser(addForm: NgForm) : void {
     const b = document.getElementById('add-user')!;
     b.click();
-
-    this.clinixService.saveUser(addForm.value).subscribe(
-      (response: User)=>{
+    addForm.value.urlPicture = this.filename;
+    
+    this.clinixService.saveUser(addForm.value, this.roleId!).subscribe(
+      (response: void)=>{
         addForm.resetForm();
       },
       (error: HttpErrorResponse)=>{
         console.log(error);
+      }
+    );
+  }
+
+  public onAddPicture(event: any) : void {
+    let file: File = event.target.files[0];
+    const b = document.getElementById('add-user')!;
+    // b.click();
+
+    const formData = new FormData();
+    formData.append('urlPicture', file, file.name); 
+    this.clinixService.onAddPicture(formData).subscribe(
+      (response: string)=>{
+        
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+        this.filename = error.error.text;
       }
     );
   }
@@ -112,6 +133,10 @@ export class RoleComponent implements OnInit {
       button.setAttribute('data-target', '#deleteRole')
     }
 
+    if (mode === 'add') { 
+      this.roleId = role.id;
+    }
+
     container.appendChild(button);
     button.click();
   }
@@ -141,4 +166,10 @@ export class RoleComponent implements OnInit {
     );
   }
 
+  /**
+   * tooltip
+   */
+  tooltip() { 
+    $('[data-toggle="tooltip"]').tooltip();
+  }
 }

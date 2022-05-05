@@ -11,6 +11,19 @@
           <a routerLink="/menu" class="nav-link">Home</a> 
         </li>
       </ul>
+
+       <!-- Notifications Dropdown Menu -->
+       <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown" style="margin-left: -43px;">
+                  <span  data-toggle="dropdown" class="text-muted"><i class="fas fa-fw fa-cog"></i></span>
+            <div class="dropdown-menu" role="menu" style="margin-left: -120px;">
+                <span href="#" class="dropdown-item"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Profile</span>
+                <div class="dropdown-divider"></div>
+                <span href="#" data-toggle="modal" data-target="#logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Déconnexion</span>
+            </div>
+          </li>
+        </ul>
+        <!--End  Notifications Dropdown Menu --> 
     </nav>
     <!-- /.navbar -->
   
@@ -33,7 +46,7 @@
             <img src="{{ clinixService.apiURL+'/clinix-SIH_api/download/'+photo }}" class="img-circle elevation-2" style="width: 50px;height: 50px;" alt="">
             <i class="fa fa-user-o" aria-hidden="true"></i>
           </div>
-          <div class="info">
+          <div class="info"> 
             <a href="#" data-toggle="modal" data-target="#logout" class="d-block">{{ fullname }}</a>
           </div>
         </div>

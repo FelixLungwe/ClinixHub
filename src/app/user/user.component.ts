@@ -12,21 +12,56 @@ import { Router } from '@angular/router';
 export class UserComponent implements OnInit {
 
   public users?: User[];
+  public user?: User;
   public isOk: boolean = false;
-  public userDelete?: User | null;
-  public userUpdate?: User | null;
   public fullname?: string;
   public photo?: string;
+  public userId?: number;
+  public filename?: string;
 
-  constructor(private clinixService: ClinixServiceService, private router: Router) { }
+  constructor(public clinixService: ClinixServiceService, private router: Router) { }
 
   ngOnInit(): void {
-    this.fullname = localStorage.getItem('fullname')!;
-    this.photo = localStorage.getItem('photo')!;
+    let userName = localStorage.getItem('username');
+    this.getUser(userName!);
     this.getUsers();
   }
 
-  public onOpenModalRole(user: User | null, mode: string) {
+  /**
+   * getUser
+   */
+  public getUser(userName: string) {
+    this.clinixService.getUser(userName).subscribe(
+      (response: User)=>{
+          // localStorage.setItem('photo', response.urlPicture);
+          this.photo = response.urlPicture;
+          this.fullname = response.fullName;
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
+
+  public onAddPicture(event: any) : void {
+    let file: File = event.target.files[0];
+    const b = document.getElementById('add-user')!;
+    // b.click();
+
+    const formData = new FormData();
+    formData.append('urlPicture', file, file.name); 
+    this.clinixService.onAddPicture(formData).subscribe(
+      (response: string)=>{
+        
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+        this.filename = error.error.text;
+      }
+    );
+  }
+
+  public onOpenModalUser(user: User, mode: string) {
     const container = document.getElementById('main-container')!;
     const button = document.createElement('button');
     button.setAttribute('data-toggle', 'modal');
@@ -35,12 +70,17 @@ export class UserComponent implements OnInit {
 
 
     if (mode === 'update') {
-      this.userUpdate = user;
+      this.user = user;
       button.setAttribute('data-target', '#updateUser')
     }
 
+    if (mode === 'detail') {
+      this.user = user;
+      button.setAttribute('data-target', '#detailUser')
+    }
+
     if (mode === 'delete') { 
-      this.userDelete = user;
+      this.userId = user.id;
       button.setAttribute('data-target', '#deleteUser')
     }
 
@@ -48,10 +88,10 @@ export class UserComponent implements OnInit {
     button.click();
   }
 
-  public onUpdateRole(user: User) : void {
+  public onUpdateUser(user: User) : void {
     const b = document.getElementById('update-user')!;
     b.click();
-
+    user.urlPicture = this.filename!;
     this.clinixService.updateUser(user).subscribe(
       (response: User)=>{
         this.getUsers();
@@ -62,7 +102,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  public onDeleteRole(userId: any) : void {
+  public ondeleteUser(userId: any) : void {
 
     this.clinixService.deleteUser(userId).subscribe(
       (response: void)=>{
@@ -82,11 +122,10 @@ export class UserComponent implements OnInit {
     this.clinixService.getUsers().subscribe(
       (response: User[])=>{
         this.users = response;
+        // console.log(this.users[0].appRoles);
       },
       (error: HttpErrorResponse)=>{
-        if (error.error.msg === "le token a expiré" && error.status === 403) {
-          this.router.navigateByUrl('/login');
-        }
+         
         console.log(error);
       }
     );
