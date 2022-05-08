@@ -48,7 +48,7 @@ export class AuthComponent implements OnInit {
         this.mode = 1;
         setTimeout(() => {
           this.mode = 2;
-        }, 3000);
+        }, 5000);
       }
     );
   }

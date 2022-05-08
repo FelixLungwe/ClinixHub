@@ -14,11 +14,14 @@ import { NgForm } from '@angular/forms';
 export class RoleComponent implements OnInit {
 
   public roles?: Role[];
-  public role?: Role;
+  public role!: Role;
   public roleId?: number;
   public fullname?: string;
   public photo?: string;
   public filename?: string;
+  public error?: string;
+  public mode?: number;
+  public userProfile!: User;
 
   constructor(public clinixService: ClinixServiceService) { }
 
@@ -27,6 +30,7 @@ export class RoleComponent implements OnInit {
     this.getUser(userName!);
 
     this.getRoles();
+    this.tooltip();
   }
   
 
@@ -36,7 +40,7 @@ export class RoleComponent implements OnInit {
   public getUser(userName: string) {
     this.clinixService.getUser(userName).subscribe(
       (response: User)=>{
-          // localStorage.setItem('photo', response.urlPicture);
+          this.userProfile = response;
           this.photo = response.urlPicture;
           this.fullname = response.fullName;
       },
@@ -46,6 +50,7 @@ export class RoleComponent implements OnInit {
     );
   }
 
+  
 
   public onAddUser(addForm: NgForm) : void {
     const b = document.getElementById('add-user')!;
@@ -57,7 +62,13 @@ export class RoleComponent implements OnInit {
         addForm.resetForm();
       },
       (error: HttpErrorResponse)=>{
+        this.error = error.error.msg;
+        this.mode = 1;
+        setTimeout(() => {
+          this.mode = 2;
+        }, 8000);
         console.log(error);
+        addForm.resetForm();
       }
     );
   }
@@ -137,9 +148,28 @@ export class RoleComponent implements OnInit {
       this.roleId = role.id;
     }
 
+    if (mode === 'profile') { 
+      button.setAttribute('data-target', '#updateUserProfile')
+    }
+
     container.appendChild(button);
     button.click();
   }
+
+  public onUpdateUser(user: User) : void {
+    const b = document.getElementById('update-user')!;
+    b.click();
+    user.urlPicture = this.filename!;
+    this.clinixService.updateUser(user).subscribe(
+      (response: User)=>{
+        // this.getUsers();
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
+
 
   public onUpdateRole(role: Role) : void {
     const b = document.getElementById('update-role')!;

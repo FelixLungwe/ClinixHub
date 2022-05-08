@@ -13,7 +13,7 @@
           </ul>
           <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
-                  <input class="form-control form-control-navbar" (ngModelChange)="searchEmploye(key.value)" #key="ngModel" ngModel name="cle" type="search" placeholder="Search" aria-label="Search">
+                  <input data-toggle="tooltip" title="permet de rechercher un patient de par ses attributs" class="form-control form-control-navbar" (ngModelChange)="searchEmploye(key.value)" #key="ngModel" ngModel name="cle" type="search" placeholder="recherche patient" aria-label="Search">
                   <div class="input-group-append">
                     <button class="btn btn-navbar" type="submit">
                       <i class="fas fa-search"></i>
@@ -21,6 +21,18 @@
                   </div>
                 </div>
           </form>
+          <!-- Notifications Dropdown Menu -->
+          <ul class="navbar-nav ml-auto" >
+            <li class="nav-item dropdown" style="margin-left: -43px;">
+                    <span  data-toggle="dropdown" class="text-muted"><i class="fas fa-fw fa-cog"></i></span>
+              <div class="dropdown-menu" role="menu" style="margin-left: -120px;">
+                  <span href="#"   class="dropdown-item"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Profile</span>
+                  <div class="dropdown-divider"></div>
+                  <span href="#" data-toggle="modal" data-target="#logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Déconnexion</span>
+              </div> 
+            </li>
+        </ul>
+        <!--End  Notifications Dropdown Menu -->
         </nav>
         <!-- /.navbar -->
       
@@ -40,7 +52,7 @@
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
               <div class="image">
-                <img src="./../../{{ photo }}" style="width: 50px;height: 50px;" class="img-circle elevation-2" alt="aaa">
+                <img src="{{ clinixService.apiURL+'/clinix-SIH_api/download/'+photo }}" style="width: 50px;height: 50px;" class="img-circle elevation-2" alt="aaa">
                 <i class="fa fa-user-o" aria-hidden="true"></i>
               </div>
               <div class="info">
@@ -51,8 +63,6 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                   <a href="/#" class="nav-link">
                     <i class="fa fa-user-plus"></i>
@@ -134,16 +144,12 @@
           <!-- /.sidebar -->
         </aside>
         
-        <!-- Content Wrapper. Contains page content -->
+        <!-- Contains page content -->
         <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          
-      
           <!-- Main content -->
         <section class="content">
 
-            <!-- ////////////// -->
-            <!-- ////modal logout -->
+            <!-- modal logout -->
             <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -163,7 +169,8 @@
                     </div>
                 </div>
             </div>
-            <!-- ////// end modal logout -->
+            <!--  end modal logout -->
+
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -179,16 +186,13 @@
                             </ol>
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
+                </div>
             </section>
-        
         
             <div class="container-fluid" id="main-container">
                 <div class="row">
                     <div class="col-12">
                         
-                        <!-- milieu -->
-
                         <!-- modal nouveau patient -->
                         <div class="modal fade" id="addPatient" >
                                 <div class="modal-dialog ">
@@ -201,7 +205,7 @@
                                                 <div class="modal-body">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h3 class="card-title text-muted">Informations générales</h3>
+                                                            <h3 class="card-title text-muted">Informations privées</h3>
                                             
                                                             <div class="card-tools">
                                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -232,6 +236,12 @@
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
+                                                                        <label>Téléphone *</label>
+                                                                        <input type="text" ngModel name="phone" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="col-sm-6">
+                                                                    <div class="form-group">
                                                                         <label>Origine *</label>
                                                                         <select ngModel name="origine" class="form-control">
                                                                             <option> --- </option>
@@ -241,14 +251,14 @@
                                                                             <option>HB</option>
                                                                         </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
+                                                                </div> -->
+                                                                <!-- <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label>Chef de famille(fullname)</label>
                                                                         <input type="text" ngModel name="chefFamille" class="form-control" placeholder=" ---" >
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
+                                                                </div> -->
+                                                                <!-- <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label>Groupe âge *</label>
                                                                         <select ngModel name="groupeAge" class="form-control">
@@ -267,7 +277,7 @@
                                                                             <option>L</option>
                                                                         </select>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </div>
                                                         <div class="card-footer text-center">
@@ -276,7 +286,7 @@
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h3 class="card-title text-muted">Informations privées</h3>
+                                                            <h3 class="card-title text-muted">Informations générales</h3>
                                             
                                                             <div class="card-tools">
                                                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -307,35 +317,39 @@
                                                                     </div>
                                                                 </div>
                                             
-                                                                <div class="col-sm-6">
+                                                                <!-- <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label>Sous-colline </label>
                                                                         <input type="text" ngModel name="sousColline" class="form-control" placeholder=" ---" required>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label>Quartier </label>
-                                                                        <input type="text" name="quartier" class="form-control" placeholder=" ---" required>
+                                                                        <input type="text" ngModel name="quartier" class="form-control" placeholder=" ---" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
-                                                                        <label>Avenue </label>
+                                                                        <label>Avenue/numéro </label>
                                                                         <input type="text" ngModel name="avenue" class="form-control" placeholder=" ---" required>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-6">
+                                                                <!-- <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label>Numero </label>
                                                                         <input type="text" ngModel name="numero" class="form-control" placeholder=" ---" required>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label>Province *</label>
                                                                         <select ngModel name="province" class="form-control" required>
                                                                             <option> --- </option>
+                                                                            <option>Bujumbura</option>
+                                                                            <option>Kayanza</option>
+                                                                            <option>Mwaro</option>
+                                                                            <option>Matana</option>
                                                                             <option>Muyinga</option>
                                                                             <option>Ngozi</option>
                                                                             <option>Ruyigi</option>
@@ -356,7 +370,7 @@
                                                 </div>
                                                 <div class="modal-footer justify-content-between">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                                    <button type="submit" [disabled]="addFormPatient.invalid" class="btn btn-primary">Ajouter</button>
                                                 </div>
                                             </div>
                                     </form>
@@ -485,41 +499,38 @@
                                     <table class="table table-striped m-0">
                                         <thead>
                                             <tr>
-                                                <th>Photo</th>
                                                 <th>Patient ID</th>
-                                                <th>nom Complet</th>
+                                                <th>Nom complet</th>
                                                 <th>Age</th>
                                                 <th>Sexe</th>
-                                                <th>Origine</th>
-                                                <th>Groupe Age</th>
-                                                <th>Chef de famille</th>
+                                                <th>téléphone</th>
                                                 <th>Province</th>
                                                 <th>Commune</th>
                                                 <th>Zone</th>
+                                                <th>Quartier</th>
+                                                <th>Avenue/numéro</th>
                                                 <th>Colline</th>
-                                                <!-- <th>Sous-colline</th> -->
-                                                <th>Acceuil</th>
-                                                <th>Statut</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let patient of patients">
-                                                <td data-target="#detailPatient" data-toggle="modal"><img class="img-circle elevation-2"
-                                                        style="width: 2.9rem;border-radius: 50%;" src="{{ patient.photo }}" alt=""></td>
-                        
                                                 <td class="text-primary">{{ patient.patientId }}</td>
                                                 <td>{{ patient.fullName }}</td>
                                                 <td>{{ patient.age }} ans</td>
                                                 <td>{{ patient.sexe }}</td>
-                                                <td>{{ patient.origine }}</td>
-                                                <td>{{ patient.groupeAge }}</td>
-                                                <td>{{ patient.chefFamille }}</td>
-                                                <td>{{ patient.province }}</td>
-                                                <td>{{ patient.commune }}</td>
-                                                <td>{{ patient.zone }}</td>
+                                                <td class="text-success">{{ patient.phone }}</td>
+                                                <td class="text-warning">{{ patient.province }}</td>
+                                                <td class="text-warning">{{ patient.commune }}</td>
+                                                <td class="text-warning">{{ patient.zone }}</td>
+                                                <td>{{ patient.quartier }}</td>
+                                                <td>{{ patient.avenue }}</td>
                                                 <td>{{ patient.colline }}</td>
-                                                <td><button type="button" (click)="onModalOpenAccueil(patient.id, 'add')"  class="btn btn-default btn-sm"><i class="far fa-file-alt a" data-toggle="tooltip" title="Accueil patient"></i></button></td>
-                                                <td><span class="badge badge-success">Entrée</span></td>
+                                                <td><button type="button" (click)="onModalOpenAccueil(patient, 'add')"  class="btn btn-default btn-sm" title="Accueil patient"><i class="far fa-file-alt a" ></i></button></td>
+                                                <td><button type="button"  (click)="onModalOpenAccueil(patient, 'update')"  class="btn btn-default btn-sm" title="Modifier patient"><i class="fas fa-edit" title="Modifier patient"></i></button></td>
+
+                                                <!-- <td><span (click)="onModalOpenAccueil(patient, 'update')"><i class="fas fa-edit"  title="Modifier un rôle"></i></span></td> -->
                                             </tr>
                                         </tbody>
                                     </table>
@@ -527,6 +538,142 @@
                             </div>
                         </div>
                         <!-- end tableau patient -->
+
+                        <!-- modal update patient -->
+                        <div class="modal fade" id="updatePatient" >
+                                <div class="modal-dialog ">
+                                    <form #editFormPatient="ngForm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <span class="text-muted"><i class="fas fa-arrow-circle-right"></i> Nouveau patient</span>
+                                                    <button type="button" class="close" data-dismiss="modal" id="add-role">x</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title text-muted">Informations privées</h3>
+                                            
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body p-0 text-muted" style="margin: 10px;">
+                                                            <div class="row">
+                                                                    <input type="hidden" ngModel="{{ patient?.id }}" name="id" class="form-control">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Nom complet *</label>
+                                                                        <input type="text" ngModel="{{ patient?.fullName }}" name="fullName" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Age *</label>
+                                                                        <input type="text" ngModel="{{ patient?.age }}" name="age" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Sexe *</label>
+                                                                        <input type="text" ngModel="{{ patient?.sexe }}" name="sexe" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Téléphone *</label>
+                                                                        <input type="text" ngModel="{{ patient?.phone }}" name="phone" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            <span class="text-danger">*tous les champs marqués sont obligatoires</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title text-muted">Informations générales</h3>
+                                            
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body p-0 text-muted" style="margin: 10px;">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                            
+                                                                    <div class="form-group">
+                                                                        <label>Commune *</label>
+                                                                        <input type="text" ngModel="{{ patient?.commune }}" name="commune" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Zone *</label>
+                                                                        <input type="text" ngModel="{{ patient?.zone }}" name="zone" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Colline </label>
+                                                                        <input type="text" ngModel="{{ patient?.colline }}" name="colline" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Quartier </label>
+                                                                        <input type="text" ngModel="{{ patient?.quartier }}" name="quartier" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Avenue/numéro </label>
+                                                                        <input type="text" ngModel="{{ patient?.avenue }}" name="avenue" class="form-control" placeholder=" ---" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>Province *</label>
+                                                                        <select ngModel="{{ patient?.province }}" name="province" class="form-control" required>
+                                                                            <option> --- </option>
+                                                                            <option>Bujumbura</option>
+                                                                            <option>Kayanza</option>
+                                                                            <option>Mwaro</option>
+                                                                            <option>Matana</option>
+                                                                            <option>Muyinga</option>
+                                                                            <option>Ngozi</option>
+                                                                            <option>Ruyigi</option>
+                                                                            <option>Bururi</option>
+                                                                            <option>Kirundo</option>
+                                                                            <option>Gitega</option>
+                                                                            <option>Muramvya</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            <span class="text-danger">*tous les champs marqués sont obligatoires</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" id="update-patient" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="submit" (click)="onUpdatePatient(editFormPatient.value)" [disabled]="editFormPatient.invalid" class="btn btn-primary">Modifier</button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                </div>
+                        </div>
+                        <!-- end modal update patient -->
+
 
                         <!-- modal detail patient -->
                         <div class="modal fade" id="detailPatient" >
@@ -644,7 +791,6 @@
                         </div>
                         <!-- end modal detail patient -->
 
-                        <!-- end milieu -->
                     </div>
                 </div>
         

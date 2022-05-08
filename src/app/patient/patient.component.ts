@@ -5,6 +5,7 @@ import { ClinixServiceService } from './../clinix-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../patient';
 import { NgForm } from '@angular/forms';
+import { User } from '../user';
 
 @Component({
   selector: 'app-patient',
@@ -14,22 +15,38 @@ import { NgForm } from '@angular/forms';
 export class PatientComponent implements OnInit {
 
   public patients?: Patient[];
-  public idPatient?: number;
-
+  public patient!: Patient;
+  public userProfile!: User;
   public fullname?: string;
   public photo?: string;
 
-  constructor(private clinixService:ClinixServiceService) { }
+  constructor(public clinixService:ClinixServiceService) { }
 
   ngOnInit(): void {
-    this.fullname = localStorage.getItem('fullname')!;
-    this.photo = localStorage.getItem('photo')!;
+    let userName = localStorage.getItem('username');
+    this.getUser(userName!);
     
     this.getPatients();
     this.tooltip();
   }
 
-  public onModalOpenAccueil(idPatient: any, mode: string) {
+  /**
+   * getUser
+   */
+  public getUser(userName: string) {
+    this.clinixService.getUser(userName).subscribe(
+      (response: User)=>{
+          this.userProfile = response;
+          this.photo = response.urlPicture;
+          this.fullname = response.fullName;
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
+
+  public onModalOpenAccueil(patient: Patient, mode: string) {
     const container = document.getElementById('main-container')!;
     const button = document.createElement('button');
     button.setAttribute('data-toggle', 'modal');
@@ -38,13 +55,19 @@ export class PatientComponent implements OnInit {
 
 
     if (mode === 'add') {
-      this.idPatient = idPatient;
-      button.setAttribute('data-target', '#acceuil')
+      // this.idPatient = idPatient;
+      button.setAttribute('data-target', '#acceuil');
+    }
+
+    if (mode === 'update') {
+      this.patient = patient;
+      button.setAttribute('data-target', '#updatePatient');
     }
 
     container.appendChild(button);
     button.click();
   }
+
 
 
   /**
@@ -70,9 +93,29 @@ export class PatientComponent implements OnInit {
     b.click();
     console.log(addForm.value);
     
-    this.clinixService.addAcceuil(addForm.value, this.idPatient!).subscribe(
+    this.clinixService.addAcceuil(addForm.value, this.patient.id!).subscribe(
       (response: void)=>{
         addForm.resetForm();
+      },
+      (error: HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
+
+  /**
+   * onUpdatePatient
+   */
+  public onUpdatePatient(patient: Patient) {
+
+    const b = document.getElementById('update-patient')!;
+    b.click();
+
+    this.clinixService.updatePatient(patient).subscribe(
+      (response: Patient)=>{
+        this.getPatients();
+        console.log(response);
+        
       },
       (error: HttpErrorResponse)=>{
         console.log(error);
@@ -106,10 +149,11 @@ export class PatientComponent implements OnInit {
       (response: Patient) => {
         console.log(response);
         this.getPatients();
+        addForm.resetForm();
       },
       (error: HttpErrorResponse) => {
         console.log(error);
-        addForm.reset();
+        addForm.resetForm();
       }
     );
   }

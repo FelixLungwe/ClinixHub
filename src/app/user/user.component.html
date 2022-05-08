@@ -15,7 +15,7 @@
           <!-- barre de recherche -->
           <form class="form-inline ml-3">
             <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="recherche utilisateur" aria-label="Search">
+              <input data-toggle="tooltip"  title="permet de rechercher un utilisateur de par ses attributs" class="form-control form-control-navbar" (ngModelChange)="searchEmploye(key.value)" #key="ngModel" ngModel name="cle" type="search" placeholder="recherche utilisateur" aria-label="Search">
               <div class="input-group-append">
                 <button class="btn btn-navbar" type="submit">
                   <i class="fas fa-search"></i>
@@ -30,13 +30,16 @@
             <li class="nav-item dropdown" style="margin-left: -43px;">
                     <span  data-toggle="dropdown" class="text-muted"><i class="fas fa-fw fa-cog"></i></span>
               <div class="dropdown-menu" role="menu" style="margin-left: -120px;">
-                  <span href="#" class="dropdown-item"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Profile</span>
+                  <span href="#" (click)="onOpenModalUser(userProfile, 'profile')" class="dropdown-item"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Profile</span>
                   <div class="dropdown-divider"></div>
                   <span href="#" data-toggle="modal" data-target="#logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400 text-muted"></i>Déconnexion</span>
               </div>
             </li>
           </ul>
           <!--End  Notifications Dropdown Menu -->
+
+          
+
         </nav>
         <!-- /.navbar -->
       
@@ -160,15 +163,14 @@
                   <div class="col-sm-6">
                     <!-- reset email -->
                     <div class="input-group mb-3" style="width: 267px;margin-left: 164px;">
-                      <input type="email" name="email" class="form-control" value="" placeholder="email" required>
+                      <input type="email" data-toggle="tooltip"  title="permet de réinitialisé le mot de passe" name="email" class="form-control" value="" placeholder="email" required>
                       <div class="input-group-append">
                         <div class="input-group-text">
                           <span class="fas fa-envelope"></span>
                         </div>
                       </div>
                     </div>
-                    <button type="button" style="margin-top: -95px;" (click)="resetPassword()" class="btn btn-primary"><i
-                      class="fas fa-sync-alt"></i> reset password</button>
+                    <button type="button" style="margin-top: -95px;" (click)="resetPassword()" class="btn btn-primary"><i class="fas fa-sync-alt"></i> reset password</button>
                       <div class="overlay text-muted" style="margin-top: -77px;margin-left: 457px;">
                         <i *ngIf="ok" class="fas fa-2x fa-sync-alt fa-spin"></i>
                       </div>
@@ -261,6 +263,92 @@
             </div>
             <!-- end tableau user   -->
 
+            <!-- modal  update userProfile-->
+            <div class="modal fade" id="updateUserProfile" >
+              <div class="modal-dialog ">
+                  <form #editFormUser="ngForm">
+                          <div class="modal-content">
+                                  <div class="modal-header">
+                                          <span class="text-muted"><i class="fas fa-arrow-circle-right"></i>  Utilisateur</span>
+                                      <button type="button" class="close" data-dismiss="modal" id="update-user">x</button>
+                                  </div>
+                                  <div class="modal-body">
+                                          <div class="card">
+                                              <div class="card-header">
+                                                  <h3 class="card-title text-muted">Informations générales</h3>
+                                          
+                                                  <div class="card-tools">
+                                                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                                      </button>
+                                                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                                      </button>
+                                                  </div>
+                                              </div>
+                                              <div class="card-body p-0 text-muted" style="margin: 10px;">
+                                                  <div class="row">
+                                                      <input type="hidden" ngModel="{{ userProfile?.id }}" name="id" class="form-control">
+
+                                                      <div class="col-sm-6">
+                                                          <div class="form-group">
+                                                              <label>Email *</label>
+                                                              <input type="email" ngModel="{{ userProfile?.email }}" name="email" class="form-control" required placeholder=" ---" >
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Nom & prénom *</label>
+                                                            <input type="text" ngModel="{{ userProfile?.fullName }}" name="fullName" class="form-control" required placeholder=" ---" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                      <div class="form-group">
+                                                          <label>téléphone *</label>
+                                                          <input type="text" ngModel="{{ userProfile?.phone }}" name="phone" class="form-control" required placeholder=" ---" >
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Username *</label>
+                                                        <input type="text" ngModel="{{ userProfile?.username }}" name="username" class="form-control" required placeholder=" ---" >
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                      <input type="hidden"  ngModel="{{ userProfile?.password }}" name="password" class="form-control" required placeholder=" ---" >
+                                                    <div class="form-group">
+                                                        <label>Password </label>
+                                                        <input type="password" disabled  class="form-control" required placeholder="*******" >
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                      <label for="exampleInputFile">Photo</label>
+                                                      <div class="input-group">
+                                                        <div class="custom-file">
+                                                          <input type="file" class="custom-file-input" (change)="onAddPicture($event)" name="urlPicture"
+                                                            id="exampleInputFile">
+                                                          <label class="custom-file-label" for="exampleInputFile">---</label>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  </div>
+                                              </div>
+                                              <!-- end contenu card -->
+                                              <div class="card-footer text-center">
+                                                  <span class="text-danger">*tous les champs marqués sont obligatoires</span>
+                                              </div>
+                                          </div>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                          <button type="button" id="update-role" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                          <button type="button" (click)="onUpdateUser(editFormUser.value)"  class="btn btn-primary">Modifier</button>
+                                  </div>
+                              </div>
+                  </form>
+              </div>
+            </div>
+            <!-- end modal update userProfile -->
+
             <!-- modal  update user-->
             <div class="modal fade" id="updateUser" >
               <div class="modal-dialog ">
@@ -340,7 +428,7 @@
                                   </div>
                                   <div class="modal-footer justify-content-between">
                                           <button type="button" id="update-role" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                          <button type="button" (click)="onUpdateUser(editFormUser.value)"  class="btn btn-primary">Ajouter</button>
+                                          <button type="button" (click)="onUpdateUser(editFormUser.value)"  class="btn btn-primary">Modifier</button>
                                   </div>
                               </div>
                   </form>

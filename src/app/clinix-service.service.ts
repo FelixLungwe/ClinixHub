@@ -134,15 +134,21 @@ export class ClinixServiceService {
    * addPatient
    */
   public addPatient(patient: Patient) : Observable<Patient> {
-    return this.http.post<Patient>(this.apiURL+"/clinix-SIH_api/patient", patient);
+    return this.http.post<Patient>(this.apiURL+"/clinix-SIH_api/patient", patient, {headers: this.getToken()});
   }
 
+  /**
+   * updatePatient
+   */
+  public updatePatient(patient: Patient) : Observable<Patient> {
+    return this.http.put<Patient>(this.apiURL+"/clinix-SIH_api/patient",patient, {headers: this.getToken()})
+  }
 
   /**
    * getPatients
    */
   public getPatients() : Observable<Patient[]>{
-    return this.http.get<Patient[]>(this.apiURL+"/clinix-SIH_api/patient")
+    return this.http.get<Patient[]>(this.apiURL+"/clinix-SIH_api/patient", {headers: this.getToken()})
   }
   //------------// end patient //--------------------//
 

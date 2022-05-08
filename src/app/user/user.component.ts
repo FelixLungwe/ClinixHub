@@ -1,3 +1,4 @@
+declare var $:any;
 import { User } from './../user';
 import { ClinixServiceService } from './../clinix-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,6 +19,7 @@ export class UserComponent implements OnInit {
   public photo?: string;
   public userId?: number;
   public filename?: string;
+  public userProfile!: User;
 
   constructor(public clinixService: ClinixServiceService, private router: Router) { }
 
@@ -25,6 +27,8 @@ export class UserComponent implements OnInit {
     let userName = localStorage.getItem('username');
     this.getUser(userName!);
     this.getUsers();
+
+    this.tooltip();
   }
 
   /**
@@ -34,6 +38,7 @@ export class UserComponent implements OnInit {
     this.clinixService.getUser(userName).subscribe(
       (response: User)=>{
           // localStorage.setItem('photo', response.urlPicture);
+          this.userProfile = response;
           this.photo = response.urlPicture;
           this.fullname = response.fullName;
       },
@@ -84,6 +89,10 @@ export class UserComponent implements OnInit {
       button.setAttribute('data-target', '#deleteUser')
     }
 
+    if (mode === 'profile') { 
+      button.setAttribute('data-target', '#updateUserProfile')
+    }
+
     container.appendChild(button);
     button.click();
   }
@@ -131,15 +140,22 @@ export class UserComponent implements OnInit {
     );
   }
 
-  // /**
-  //  * resetPassword
-  //  */
-  // public resetPassword() {
-  //    this.isOk = true;
-  //    setTimeout(() => {
-  //      this.isOk = false;
-  //    }, 3000);
-  // }
+  public searchEmploye(key: string) : void {
+    const results: User[] = [];
+    for(const user of this.users!)
+    {
+      if (user.username.toLowerCase().indexOf(key.toLowerCase()) !== -1 || user.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1 || user.fullName.toLowerCase().indexOf(key.toLowerCase()) !== -1 || user.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 )
+      {
+          results.push(user);
+      }
+    }
+    this.users = results;
+
+    if (results.length === 0 || !key)
+    {
+       this.getUsers();
+    }
+  }
    /**
    * resetPassword
    */
@@ -155,4 +171,11 @@ export class UserComponent implements OnInit {
       }, 3000);
     }, 3000);
  }
+
+ /**
+   * tooltip
+   */
+  tooltip() { 
+    $('[data-toggle="tooltip"]').tooltip();
+  }
 }
