@@ -1,8 +1,10 @@
 export interface Acceuil{
-    id: number;
-    envoyeConsult: string;
-    serviceDestination: string;
-    dateSortie: Date;
-    dureeSejour: number;
-    modePaiement: string;
+     id: number;
+	 chefFamille: string;
+	 gpeAge: string;
+	 origine: string;
+	 dateConsult: Date;
+	 serviceDestination: string;
+	 modePaiement: string;
+	 state: number;
 }

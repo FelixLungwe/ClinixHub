@@ -40,6 +40,7 @@
             ],
             "scripts": [
               "./node_modules/admin-LTE/plugins/jquery/jquery.min.js",
+              "./node_modules/admin-LTE/plugins/select2/js/select2.full.min.js",
               "./node_modules/admin-LTE/plugins/bootstrap/js/bootstrap.bundle.min.js",
               "./node_modules/admin-LTE/dist/js/adminlte.min.js",
               "./node_modules/admin-LTE/dist/js/demo.js",

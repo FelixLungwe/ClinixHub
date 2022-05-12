@@ -55,7 +55,7 @@ export class PatientComponent implements OnInit {
 
 
     if (mode === 'add') {
-      // this.idPatient = idPatient;
+      this.patient = patient;
       button.setAttribute('data-target', '#acceuil');
     }
 
@@ -92,6 +92,7 @@ export class PatientComponent implements OnInit {
     const b = document.getElementById('add-accueil')!;
     b.click();
     console.log(addForm.value);
+    console.log(this.patient.id);
     
     this.clinixService.addAcceuil(addForm.value, this.patient.id!).subscribe(
       (response: void)=>{

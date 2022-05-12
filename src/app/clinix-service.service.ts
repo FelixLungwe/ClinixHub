@@ -152,13 +152,24 @@ export class ClinixServiceService {
   }
   //------------// end patient //--------------------//
 
+
+
   //------------// acceuil //-------------------------//
+
+   
+
+  /**
+   * patient
+   */
+  public patient(PatientId: number) : Observable<Patient>{
+    return this.http.get<Patient>(this.apiURL+"/clinix-SIH_api/patient/"+PatientId, {headers: this.getToken()});
+  }
 
   /**
    * getAcceuil
    */
   public getAcceuil() : Observable<Acceuil[]> {
-    return this.http.get<Acceuil[]>(this.apiURL+"/clinix-SIH_api/acceuil");
+    return this.http.get<Acceuil[]>(this.apiURL+"/clinix-SIH_api/acceuil", {headers: this.getToken()});
   }
 
   /**
@@ -186,7 +197,7 @@ export class ClinixServiceService {
    * addAcceuil
    */
   public addAcceuil(acceuil: Acceuil, idPatient: number) : Observable<void> {
-    return this.http.post<void>(this.apiURL+"/clinix-SIH_api/acceuil/"+idPatient, acceuil);
+    return this.http.post<void>(this.apiURL+"/clinix-SIH_api/acceuil/"+idPatient, acceuil, {headers: this.getToken()});
   }
   //------------// end acceuil //--------------------//
    
