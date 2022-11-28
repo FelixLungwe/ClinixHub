@@ -1,0 +1,345 @@
+<div class="wrapper">
+  <!-- Navbar -->
+  <!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+  </ul>
+
+</nav>
+<!-- /.navbar -->
+
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+   
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="../../assets/135795433_2906883476209035_4595411502140686371_n.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">Alexander Pierce</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listes</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <!-- Content Header (Page header) -->
+<section class="content-header">
+<div class="container-fluid">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-info float-left" data-target="#addPatient" data-toggle="modal"><i class="fas fa-plus"></i> Patient</button>
+      <div class="modal fade show text-muted" id="addPatient" aria-modal="true">
+        <form >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Enregistrement</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Information generale</h3>
+        
+                        <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                          </button>
+                          <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body">
+                        
+                          <div class="row">
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                  <label>Designation</label>
+                                  <input ngModel name="name" type="text" class="form-control" placeholder="Enter ...">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                  <label>Prix</label>
+                                  <input ngModel name="prix" type="text" class="form-control" placeholder="Enter ...">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label>Quantité</label>
+                                  <input ngModel name="quantite" type="text" class="form-control" placeholder="Enter ...">
+                                </div>
+                              </div>
+                            </div>
+                    
+                        <!-- /.row -->
+                      </div>
+                      <!-- /.card-body -->
+                      
+                      <!-- /.footer -->
+                    </div>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" id="closeAdd" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </form>
+        </div>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Liste des Produits</li>
+      </ol>
+    </div>
+  </div>
+</div><!-- /.container-fluid -->
+</section> 
+
+  <!-- Main content -->
+  <!-- Main content -->
+<section class="content text-muted">
+<!-- /.card -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Liste des Produits</h3>
+
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <!-- card-body -->
+      <!-- card-body -->
+
+<div class="card-body table-responsive p-0">
+<table class="table table-hover text-nowrap">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Designation</th>
+    <th>Prix</th>
+    <th>Quantité</th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <!-- <tr *ngFor="let produit of produits">
+    <td class="text-primary">{{ produit.id }}</td>
+    <td>{{ produit.name }}</td>
+    <td>{{ produit.prix }}</td>
+    <td>{{ produit.quantite }}</td> -->
+    <!-- <td><button type="button" class="btn btn-default btn-sm" title="supprimer" (click)="onDeleteProduit(produit.id)"><i
+      class="far fa-file-alt a"></i></button></td>
+<td><button type="button" class="btn btn-default btn-sm" data-toggle="modal" href="#updateProduit"
+    (click)="getProduit(produit.id)"><i
+      class="fas fa-edit" title="Modifier patient"></i></button></td> -->
+    <td><button type="button" class="btn btn-default btn-sm" title="supprimer" data-target="#delProduit" data-toggle="modal"><i class="far fa-trash-alt"></i></button></td>
+    <td><button type="button" class="btn btn-default btn-sm" title="modifier" data-target="#updateProduit" data-toggle="modal"><i class="fas fa-edit"></i></button></td>
+
+  <!-- </tr> -->
+  
+</tbody>
+<!-- <tbody>
+  <tr *ngFor="let produit of produits">
+    <td class="text-primary">{{ produit.id }}</td>
+    <td>{{ produit.name }}</td>
+    <td>{{ produit.prix }}</td>
+    <td class="text-success">{{ produit.quantite }}</td>
+    <td><button type="button" class="btn btn-default btn-sm" title="supprimer" (click)="onDeleteProduit(produit.id)"><i
+          class="far fa-file-alt a"></i></button></td>
+    <td><button type="button" class="btn btn-default btn-sm" data-toggle="modal" href="#updateProduit"
+        (click)="getProduit(produit.id)"><i
+          class="fas fa-edit" title="Modifier patient"></i></button></td>
+
+
+</tbody> -->
+
+</table>
+
+</div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+<div class="modal fade show text-muted" id="delProduit" aria-modal="true">
+<form >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Suppression</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <span id="delInfo">Voulez-vous vraiment {{ produit.name }}</span> -->
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" id="closeDelete" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button type="button"  class="btn btn-primary">Oui</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</form>
+</div>
+
+
+  <div class="modal fade show text-muted" id="updateProduit" aria-modal="true">
+    <form >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Modification</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Information generale</h3>
+    
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    
+                      <div class="row">
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label>Designation</label>
+                              <input ngModel name="name" type="text" class="form-control" placeholder="Enter ...">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Prix</label>
+                              <input ngModel name="prix" type="text" class="form-control" placeholder="Enter ...">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label>Quantité</label>
+                              <input ngModel name="quantite" type="text" class="form-control" placeholder="Enter ...">
+                            </div>
+                          </div>
+                        </div>
+                
+                    <!-- /.row -->
+                  </div>
+                  <!-- /.card-body -->
+                  
+                  <!-- /.footer -->
+                </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+        </div>
+        <!-- /.modal-content m -->
+      </div>
+      <!-- /.modal-dialog -->
+    </form>
+    </div>
+  
+
+</section>
+<!-- /.content -->
+
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+  <!-- /.content-wrapper -->
+
+  <!--Footer of page-->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.5
+    </div>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
+</footer>
+
+  <!--End Foot of page-->
+
+</div>
+<!-- ./wrapper -->
+

@@ -1,16 +1,18 @@
-import { Acceuil } from './acceuil';
+import { AccueilConsultExt } from './accueilConsultExt'
 export interface Patient{
-    id: number;
-    patientId: string;
-    fullName: string;
-    age: any;
+    patient_id: number;
+ //   matricule: string;
+    fullname: number;
+    age: string;
     sexe: string;
     province: string;
     commune: string;
     zone: string;
-    colline: string;
-    phone: string;
-    quartier: string;
-    avenue: string;
-    accueils: Acceuil[];
+    quartierCollineAndSousColline: string;
+    rue_avenue: string;
+    dateNaissance: Date;
+    dateEnregistre: Date;
+
+    accueilConsultExt: AccueilConsultExt[];
+
 }

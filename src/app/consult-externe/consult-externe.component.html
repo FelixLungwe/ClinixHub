@@ -1,0 +1,318 @@
+<!-- Site wrapper -->
+<div class="wrapper">
+<app-header-aside></app-header-aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper text-muted" >
+    <section>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Fixed Header Table</h3>
+
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" style="height: 180px;">
+              <table class="table table-head-fixed text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Reason</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>183</td>
+                    <td>John Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>219</td>
+                    <td>Alexander Pierce</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>657</td>
+                    <td>Bob Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>175</td>
+                    <td>Mike Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>134</td>
+                    <td>Jim Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>494</td>
+                    <td>Victoria Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>832</td>
+                    <td>Michael Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                  <tr>
+                    <td>982</td>
+                    <td>Rocky Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+     </section>
+    <!-- Content Header (Page header) -->
+    <section class="content-header" style="margin-block-end: -31px;
+    margin-block-start: -17px;">
+      <div class="container-fluid">
+        <div class="row mb-2" >
+          
+          <div class="col-sm-6" >
+            <h3 style="text-indent: 1em;">Patient</h3>
+          </div>
+          <div class="col-sm-6">
+            <h3 style="text-indent: 1em;">Service  
+              <label style="text-indent: 1em;">ID Patient</label>
+              <!-- ngModel="{{ produit?.id }}" -->
+              <!-- <script>
+                function getValue(){
+                  var input = document.getElementById("patientActiveID").value;
+                  document.getElementById("patientActiveID2").val(input);         
+                }
+              </script> -->
+              <!-- <input type="hidden" id="patientActiveID2"> -->
+              <input  [(ngModel)]="patientRecentID" id="patientActiveID" style="width: 150px; border-radius: 1rem; height: 40px; border-color: red;" type="text" >
+              <!-- <button type="button" style="border-radius: 1rem; height: 45px; width: 25px; margin-block-end: 6px;" class="btn btn-primary" [disabled]="b == 1">OK</button></h3> -->
+              
+          </div>
+        <!-- </div> -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary" style="border-radius: 1em;border-left-color: red;border-width: 2px">
+              
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form #addFormPatient="ngForm" (ngSubmit)="onAddPatient(addFormPatient)">
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Full Name :</label>
+                        <input ngModel name="fullname" type="text" class="form-control" placeholder="nom complet ...">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>No. Tel :</label>
+                        <input ngModel name="numero" type="text" class="form-control" placeholder="num phone ...">
+                      </div>
+                    </div>
+                   
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Sexe :</label>
+                        <input ngModel name="sexe" type="text" class="form-control" placeholder="sexe ...">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Date Naissance :</label>
+                        <input ngModel name="dateNaissance" type="text" class="form-control" placeholder="date de Naissance ..." >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Province :</label>
+                        <input ngModel name="province" type="text" class="form-control" placeholder="province ...">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Commune :</label>
+                        <input ngModel name="commune" type="text" class="form-control" placeholder="commune ..." >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Zone :</label>
+                        <input ngModel name="zone" type="text" class="form-control" placeholder="zone ...">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>quartierColline/S-Colline :</label>
+                        <input ngModel name="quartierCollineAndSousColline" type="text" class="form-control" placeholder="quartier ou Colline/SousColline ...">
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Rue/ Avenue : </label>
+                        <input ngModel name="rue_avenue" type="text" class="form-control" placeholder="rue ou avenue ..." >
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group" style="  margin-block-start: 28px; margin-left: 70px;">
+                        <button style="width: 130px; height: 45px; align-content: left; " type="submit" class="btn btn-block btn-primary btn-lg">Enregistrer</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+            <!-- general form elements disabled -->
+            <div class="card card-warning" style="border-radius: 1em;border-left-color: red;border-width: 2px">
+              
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form #addFormAccueilConsultExt="ngForm" (ngSubmit)="onAddPatientToAccueilConsultExt(addFormAccueilConsultExt)">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Chef de Famille :</label>
+                        <!-- <input ngModel type="hidden" name="patient_id" value="{{patientRecentID}}"> -->
+                        <input ngModel name="chefFamille" type="text" class="form-control" placeholder="Enter ...">
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Mode de Payement :</label>
+                        <input ngModel name="modePayement" type="text" class="form-control" placeholder="Enter ...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Origine :</label>
+                        <input ngModel name="origine" type="text" class="form-control" placeholder="Enter ...">
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Servive de Destination :</label>
+                        <input ngModel name="serviceDestination" type="text" class="form-control" placeholder="Enter ...">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- button -->
+                      <div class="form-group" style="  margin-block-start: 28px; margin-left: 320px;">
+                        <button style="width: 130px; height: 45px; align-content: left; " type="submit" class="btn btn-block btn-primary btn-lg">Enregistrer</button>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+
+
+        
+      </div><!-- /.container-fluid -->
+      
+    </section>
+    <!-- /.content -->
+      
+</div> 
+  <!-- /.content-wrapper -->
+
+<app-my-footer></app-my-footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- alert save patient-->
+<div *ngIf="mode === 1" class="col-lg-12 col-md-12">
+  <div id="toast-container" class="toast-top-right">
+    <div class="toast toast-error" aria-live="assertive" style="opacity: 0.9000;">
+      <div class="toast-message">[OK]patient enregistré avec succès</div>
+    </div>
+  </div>
+</div>
+<!-- ./ alert save patient-->
+
